@@ -1,9 +1,12 @@
-Open Movement devices are miniature, embeddable, open source sensors developed at [http://di.ncl.ac.uk/blog/open-movement/ Newcastle University, UK].
+Open Movement devices are miniature, embeddable, open source sensors developed at [http://di.ncl.ac.uk/blog/open-movement/ Newcastle University, UK].  The source code for the firmware and software is available under a [http://www.opensource.org/licenses/BSD-2-Clause BSD 2-clause license] ([http://code.google.com/p/openmovement/source/browse/trunk/Firmware/LICENSE.TXT source text]), and the hardware (PCB designs, layouts and schematics), enclosure designs and documentation are available under a [http://creativecommons.org/licenses/by/3.0/ Creative Commons 3.0 BY Attribution License] ([http://openmovement.googlecode.com/svn/trunk/Firmware/LICENSE.TXT source text]).
 
-* Devices
+* [OpenMovement Overview]
   * [AX3 AX3 Movement logging]
   * [WAX3 WAX3 Wireless accelerometers]
   * [AXi AXi '9-Axis' device with display]
+  * [WAX9 WAX9 Wireless IMU]
+  * [BuildAX BuildAX Building monitoring]
+  * [WeighAX WeightAX Weight monitoring]
 
 * [http://code.google.com/p/openmovement/wiki/Downloads?tm=2 Downloads]
 
@@ -12,5 +15,13 @@ Open Movement devices are miniature, embeddable, open source sensors developed a
 * [http://code.google.com/p/openmovement/wiki/Support?tm=3 Support & Issues]
 
 * [http://code.google.com/p/openmovement/wiki/Source?tm=4 Source]
+
+
+=== See also ===
+
+* [http://www.youtube.com/watch?v=VzoiavPzQLc&list=PLC1bL6IftT9n4OTHR1XlHCsjc54-6bvpw/ YouTube Channel]
+
+* [http://groups.google.com/group/openmovement Google Groups]
+
 
 ==
