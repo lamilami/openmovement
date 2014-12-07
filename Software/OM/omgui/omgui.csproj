@@ -155,6 +155,30 @@
     <Compile Include="ExportForm.Designer.cs">
       <DependentUpon>ExportForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ExportSvmForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ExportSvmForm.Designer.cs">
+      <DependentUpon>ExportSvmForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ExportWtvForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ExportWtvForm.Designer.cs">
+      <DependentUpon>ExportWtvForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ExportPaeeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ExportPaeeForm.Designer.cs">
+      <DependentUpon>ExportPaeeForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ExportWavForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ExportWavForm.Designer.cs">
+      <DependentUpon>ExportWavForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="InputBox.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -227,6 +251,18 @@
     <EmbeddedResource Include="ExportForm.resx">
       <DependentUpon>ExportForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ExportSvmForm.resx">
+      <DependentUpon>ExportSvmForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ExportWtvForm.resx">
+      <DependentUpon>ExportWtvForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ExportPaeeForm.resx">
+      <DependentUpon>ExportPaeeForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ExportWavForm.resx">
+      <DependentUpon>ExportWavForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="InputBox.resx">
       <DependentUpon>InputBox.cs</DependentUpon>
     </EmbeddedResource>
@@ -281,6 +317,14 @@
     </Content>
     <Content Include="Application Icon.ico" />
     <Content Include="OmGui.ico" />
+    <None Include="Resources\Download.png" />
+    <None Include="Resources\User.png" />
+    <None Include="Resources\tag.png" />
+    <None Include="Resources\SyncTime.png" />
+    <None Include="Resources\DisplayInColorHS.png" />
+    <None Include="Resources\GetLatestVersion.png" />
+    <None Include="Resources\Data.png" />
+    <None Include="Resources\FunctionHS.png" />
     <None Include="Resources\DeleteHS.png" />
     <None Include="Resources\Export.png" />
     <None Include="Resources\Refresh.png" />
