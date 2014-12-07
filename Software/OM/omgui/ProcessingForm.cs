@@ -150,13 +150,12 @@ namespace OmGui
             {
                 if (Execute())
                 {
-                    buttonOK.Enabled = true;
+                    if (InvokeRequired) { this.Invoke(new MethodInvoker(() => { buttonOK.Enabled = true; })); }                    
                 }
             };
             backgroundWorker.RunWorkerCompleted += (bws, bwe) =>
             {
                 cancelClose = false;
-                if (InvokeRequired) { this.Invoke(new MethodInvoker(() => { pictureBoxProgress.Visible = false; })); }                
                 //this.Close();
             };
 
@@ -167,6 +166,7 @@ namespace OmGui
 
         private void timerUpdate_Tick(object sender, EventArgs e)
         {
+            pictureBoxProgress.Visible = backgroundWorker.IsBusy;
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)

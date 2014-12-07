@@ -3901,7 +3901,7 @@ Application.DoEvents();
 
                     if (sourceTime <= destinationTime)
                     {
-                        sb.Append("Older file exists: " + resultFile + "\r\n");
+                        sb.Append("File already exists: " + resultFile + "\r\n");
                     }
                     else
                     {
