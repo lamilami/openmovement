@@ -1,4 +1,26 @@
-﻿using System;
+﻿/*
+
+Make .WAV:
+ * Form compatible with multiple source files
+ * - Interpolated sample rate (100Hz, 50Hz, 25Hz)
+ * - No auto-calibrate
+ * (note: derived summaries can be affected by the sample rate)
+
+Make .SVM.CSV
+ * Epoch (60 seconds)
+ * Filter (off, 0.5-20Hz)
+ * Mode: abs(sum(svm-1)) vs max(0,sum(svm-1(
+
+Make .WTV.CSV
+ * Epochs (number of 0.5 minute periods)
+
+Make .PAEE.CSV
+ * Epochs (number of 1 minute periods)
+ * Model (dominant/"right" hand, non-dominant/"left" hand, weight)
+
+ */
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -2474,7 +2496,7 @@ Console.WriteLine("toolStripButtonDownload_Click() ENDED...");
         {
             for(int i = toolStripFiles.Items.Count; i > 4; i--)
             {
-                toolStripFiles.Items.RemoveAt(toolStripFiles.Items.Count-1);
+                //toolStripFiles.Items.RemoveAt(toolStripFiles.Items.Count-1);
             }
             
             if (pluginManager.LoadProfilePlugins())
@@ -3791,10 +3813,180 @@ Application.DoEvents();
             BackgroundTaskStatus(false);
         }
 
+
+        // ---------- EXPORT ----------
+
         private void exportToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ExportDataConstruct();
-        } 
+        }
+
+        string[] GetSelectedFilesToConvert(string newExtension, bool requiredWav)
+        {
+            // Check no devices selected
+            if (devicesListView.SelectedItems.Count > 0)
+            {
+                DialogResult dr = MessageBox.Show(this, "Cannot perform this action on files until they have been downloaded.\nDownload the files or deselect the device(s).", "Device(s) selected", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
+                return null;
+            }
+
+            // Check at least one file selected
+            List<string> files = new List<string>();
+            foreach (ListViewItem item in filesListView.SelectedItems)
+            {
+                OmReader reader = (OmReader)item.Tag;
+                files.Add(reader.Filename);
+            }
+            if (files.Count <= 0)
+            {
+                DialogResult dr = MessageBox.Show(this, "No files selected.", "No files selected", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
+                return null;
+            }
+
+            // If we need .WAV files, check if any are missing
+            StringBuilder sb = new StringBuilder();
+            if (requiredWav)
+            {
+                List<string> wavFiles = new List<string>();
+                foreach (string file in files)
+                {
+                    string wavFile = Path.ChangeExtension(file, ".wav");
+                    if (File.Exists(wavFile))
+                    {
+                        DateTime sourceTime = DateTime.MinValue;
+                        try { sourceTime = File.GetLastWriteTime(file); } catch { ; }
+                        DateTime destinationTime = DateTime.MinValue;
+                        try { destinationTime = File.GetLastWriteTime(wavFile); } catch { ; }
+
+                        if (destinationTime < sourceTime)
+                        {
+                            wavFiles.Add(file);
+                            sb.Append(".WAV exists but is older than source: " + wavFile + "\r\n");
+                        }
+                    }
+                    else
+                    {
+                        wavFiles.Add(file);
+                        sb.Append(".WAV conversion does not exist: " + wavFile + "\r\n");
+                    }
+                }
+
+                // Overwrite prompt
+                if (sb.Length > 0)
+                {
+                    DialogResult dr = MessageBox.Show(this, "One or more files needs resampling to .WAV format first:\r\n\r\n" + sb.ToString() + "\r\nAre you sure you want to overwrite?", "Resample to WAV first?", MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+                    if (dr == DialogResult.OK)
+                    {
+                        DoWavConvert(wavFiles.ToArray());
+                        return null;
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+            }
+
+            // Build a list of messages for the overwrite prompt
+            sb = new StringBuilder();
+            foreach (string file in files)
+            {
+                string resultFile = Path.ChangeExtension(file, newExtension);
+                if (File.Exists(resultFile))
+                {
+                    DateTime sourceTime = DateTime.MinValue;
+                    try { sourceTime = File.GetLastWriteTime(file); } catch { ; }
+                    DateTime destinationTime = DateTime.MinValue;
+                    try { destinationTime = File.GetLastWriteTime(resultFile); } catch { ; }
+
+                    if (sourceTime <= destinationTime)
+                    {
+                        sb.Append("Older file exists: " + resultFile + "\r\n");
+                    }
+                    else
+                    {
+                        sb.Append("Caution, newer file exists: " + resultFile + "\r\n");
+                    }
+                }
+            }
+
+            // Overwrite prompt
+            if (sb.Length > 0)
+            {
+                DialogResult dr = MessageBox.Show(this, "Overwrite the following files:\r\n\r\n" + sb.ToString() + "\r\nAre you sure you want to overwrite?", "Overwrite existing files", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button3);
+                if (dr != DialogResult.Yes)
+                {
+                    return null;
+                }
+            }
+
+
+            return files.ToArray();
+        }
+
+        //string[] UtilityCheckOverwrites(string newExtension)
+        //{
+        //}
+
+        private void DoWavConvert(string[] files)
+        {
+            if (files == null) { return; }
+            DialogResult dr = (new ExportWavForm()).ShowDialog();
+            if (dr != System.Windows.Forms.DialogResult.OK) { return; }
+// TODO: convert...
+        }
+
+
+        private void wavToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Make .WAV:
+            //  * Form compatible with multiple source files
+            //  * - Interpolated sample rate (100Hz, 50Hz, 25Hz)
+            //  * - No auto-calibrate
+            //  * (note: derived summaries can be affected by the sample rate)
+            string[] files = GetSelectedFilesToConvert(".wav", false);
+            if (files == null) { return; }
+            DoWavConvert(files);
+        }
+
+
+
+        private void svmToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Make .SVM.CSV
+            //  * Epoch (60 seconds)
+            //  * Filter (off, 0.5-20Hz)
+            //  * Mode: abs(sum(svm-1)) vs max(0,sum(svm-1(
+            string[] files = GetSelectedFilesToConvert(".svm.csv", true);
+            if (files == null) { return; }
+            DialogResult dr = (new ExportSvmForm()).ShowDialog();
+            if (dr != System.Windows.Forms.DialogResult.OK) { return; }
+// TODO: convert...
+        }
+
+        private void cutPointsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Make .PAEE.CSV
+            //  * Epochs (number of 1 minute periods)
+            //  * Model (dominant/"right" hand, non-dominant/"left" hand, weight)
+            string[] files = GetSelectedFilesToConvert(".paee.csv", true);
+            if (files == null) { return; }
+            DialogResult dr = (new ExportPaeeForm()).ShowDialog();
+            if (dr != System.Windows.Forms.DialogResult.OK) { return; }
+// TODO: convert...
+        }
+
+        private void wearTimeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Make .WTV.CSV
+            //  * Epochs (number of 0.5 minute periods)
+            string[] files = GetSelectedFilesToConvert(".wtv.csv", true);
+            if (files == null) { return; }
+            DialogResult dr = (new ExportWtvForm()).ShowDialog();
+            if (dr != System.Windows.Forms.DialogResult.OK) { return; }
+// TODO: convert...
+        }
+
 
     }
 }
