@@ -33,5 +33,10 @@ namespace OmGui
         private void ExportSvmForm_Load(object sender, EventArgs e)
         {
         }
+
+        public int Epoch { get { int epoch = 60; int.TryParse(comboBoxRate.Text, out epoch); return epoch; } }
+        public int Filter { get { return comboBoxFilter.SelectedIndex; } }
+        public int Mode { get { return comboBoxMode.SelectedIndex; } }
+
     }
 }

@@ -28,14 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ExportSvmForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ExportWavForm));
             this.buttonResample = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.checkBoxAutoCalibrate = new System.Windows.Forms.CheckBox();
             this.comboBoxRate = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.checkBoxAutoCalibrate = new System.Windows.Forms.CheckBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -78,14 +78,17 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Options";
             // 
-            // label1
+            // checkBoxAutoCalibrate
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 35);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(86, 17);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Resampling:";
+            this.checkBoxAutoCalibrate.AutoSize = true;
+            this.checkBoxAutoCalibrate.Checked = true;
+            this.checkBoxAutoCalibrate.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxAutoCalibrate.Location = new System.Drawing.Point(98, 63);
+            this.checkBoxAutoCalibrate.Name = "checkBoxAutoCalibrate";
+            this.checkBoxAutoCalibrate.Size = new System.Drawing.Size(119, 21);
+            this.checkBoxAutoCalibrate.TabIndex = 4;
+            this.checkBoxAutoCalibrate.Text = "&Auto Calibrate";
+            this.checkBoxAutoCalibrate.UseVisualStyleBackColor = true;
             // 
             // comboBoxRate
             // 
@@ -114,17 +117,16 @@
             this.label2.TabIndex = 2;
             this.label2.Text = "Hz";
             // 
-            // checkBoxAutoCalibrate
+            // label1
             // 
-            this.checkBoxAutoCalibrate.AutoSize = true;
-            this.checkBoxAutoCalibrate.Location = new System.Drawing.Point(98, 63);
-            this.checkBoxAutoCalibrate.Name = "checkBoxAutoCalibrate";
-            this.checkBoxAutoCalibrate.Size = new System.Drawing.Size(119, 21);
-            this.checkBoxAutoCalibrate.TabIndex = 4;
-            this.checkBoxAutoCalibrate.Text = "&Auto Calibrate";
-            this.checkBoxAutoCalibrate.UseVisualStyleBackColor = true;
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 35);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(86, 17);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Resampling:";
             // 
-            // ExportSvmForm
+            // ExportWavForm
             // 
             this.AcceptButton = this.buttonResample;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -137,6 +139,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ExportWavForm";
             this.Text = "Resample to .WAV";
+            this.Load += new System.EventHandler(this.ExportWavForm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);

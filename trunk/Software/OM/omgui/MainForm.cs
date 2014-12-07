@@ -3928,12 +3928,25 @@ Application.DoEvents();
         //{
         //}
 
+        private static string OMCONVERT_EXE = @"Plugins\OmConvertPlugin\omconvert.exe";
+
         private void DoWavConvert(string[] files)
         {
             if (files == null) { return; }
-            DialogResult dr = (new ExportWavForm()).ShowDialog();
+            ExportWavForm optionsForm = new ExportWavForm();
+            DialogResult dr = optionsForm.ShowDialog();
             if (dr != System.Windows.Forms.DialogResult.OK) { return; }
-// TODO: convert...
+            foreach (string file in files)
+            {
+                List<string> args = new List<string>();
+                args.Add("\"" + file + "\"");
+                args.Add("-resample"); args.Add("" + optionsForm.Rate);
+                args.Add("-calibrate"); args.Add(optionsForm.AutoCalibrate ? "1" : "0");
+                args.Add("-out"); args.Add("\"" + Path.ChangeExtension(file, ".wav") + "\"");
+                ProcessingForm processingForm = new ProcessingForm(OMCONVERT_EXE, args);
+                dr = processingForm.ShowDialog();
+                if (dr == System.Windows.Forms.DialogResult.Cancel) { break; }
+            }
         }
 
 
@@ -3959,9 +3972,21 @@ Application.DoEvents();
             //  * Mode: abs(sum(svm-1)) vs max(0,sum(svm-1(
             string[] files = GetSelectedFilesToConvert(".svm.csv", true);
             if (files == null) { return; }
-            DialogResult dr = (new ExportSvmForm()).ShowDialog();
+            ExportSvmForm optionsForm = new ExportSvmForm();
+            DialogResult dr = optionsForm.ShowDialog();
             if (dr != System.Windows.Forms.DialogResult.OK) { return; }
-// TODO: convert...
+            foreach (string file in files)
+            {
+                List<string> args = new List<string>();
+                args.Add("\"" + Path.ChangeExtension(file, ".wav") + "\"");
+                args.Add("-svm-epoch"); args.Add("" + optionsForm.Epoch);
+                args.Add("-svm-filter"); args.Add("" + optionsForm.Filter);
+                args.Add("-svm-mode"); args.Add("" + optionsForm.Mode);
+                args.Add("-svm-file"); args.Add("\"" + Path.ChangeExtension(file, ".svm.csv") + "\"");
+                ProcessingForm processingForm = new ProcessingForm(OMCONVERT_EXE, args);
+                dr = processingForm.ShowDialog();
+                if (dr == System.Windows.Forms.DialogResult.Cancel) { break; }
+            }
         }
 
         private void cutPointsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -3971,9 +3996,20 @@ Application.DoEvents();
             //  * Model (dominant/"right" hand, non-dominant/"left" hand, weight)
             string[] files = GetSelectedFilesToConvert(".paee.csv", true);
             if (files == null) { return; }
-            DialogResult dr = (new ExportPaeeForm()).ShowDialog();
+            ExportPaeeForm optionsForm = new ExportPaeeForm();
+            DialogResult dr = optionsForm.ShowDialog();
             if (dr != System.Windows.Forms.DialogResult.OK) { return; }
-// TODO: convert...
+            foreach (string file in files)
+            {
+                List<string> args = new List<string>();
+                args.Add("\"" + Path.ChangeExtension(file, ".wav") + "\"");
+                args.Add("-paee-epoch"); args.Add("" + optionsForm.Epoch);
+                args.Add("-paee-model"); args.Add("" + optionsForm.Model);
+                args.Add("-paee-file"); args.Add("\"" + Path.ChangeExtension(file, ".paee.csv") + "\"");
+                ProcessingForm processingForm = new ProcessingForm(OMCONVERT_EXE, args);
+                dr = processingForm.ShowDialog();
+                if (dr == System.Windows.Forms.DialogResult.Cancel) { break; }
+            }
         }
 
         private void wearTimeToolStripMenuItem_Click(object sender, EventArgs e)
@@ -3982,9 +4018,19 @@ Application.DoEvents();
             //  * Epochs (number of 0.5 minute periods)
             string[] files = GetSelectedFilesToConvert(".wtv.csv", true);
             if (files == null) { return; }
-            DialogResult dr = (new ExportWtvForm()).ShowDialog();
+            ExportWtvForm optionsForm = new ExportWtvForm();
+            DialogResult dr = optionsForm.ShowDialog();
             if (dr != System.Windows.Forms.DialogResult.OK) { return; }
-// TODO: convert...
+            foreach (string file in files)
+            {
+                List<string> args = new List<string>();
+                args.Add("\"" + Path.ChangeExtension(file, ".wav") + "\"");
+                args.Add("-wtv-epoch"); args.Add("" + optionsForm.Epoch);
+                args.Add("-wtv-file"); args.Add("\"" + Path.ChangeExtension(file, ".wtv.csv") + "\"");
+                ProcessingForm processingForm = new ProcessingForm(OMCONVERT_EXE, args);
+                dr = processingForm.ShowDialog();
+                if (dr == System.Windows.Forms.DialogResult.Cancel) { break; }
+            }
         }
 
 
