@@ -27,5 +27,13 @@ namespace OmGui
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
+
+        private void ExportWavForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        public int Rate { get { int rate = 100; int.TryParse(comboBoxRate.Text, out rate); return rate; } }
+        public bool AutoCalibrate { get { return checkBoxAutoCalibrate.Checked; } }
     }
 }

@@ -27,5 +27,7 @@ namespace OmGui
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
+
+        public int Epoch { get { int epoch = 1; int.TryParse(comboBoxRate.Text, out epoch); return epoch; } }
     }
 }

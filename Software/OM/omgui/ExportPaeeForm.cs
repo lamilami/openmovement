@@ -14,6 +14,7 @@ namespace OmGui
         public ExportPaeeForm()
         {
             InitializeComponent();
+            comboBox1.SelectedIndex = 0;
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)
@@ -27,5 +28,8 @@ namespace OmGui
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
+
+        public int Epoch { get { int epoch = 1; int.TryParse(comboBoxRate.Text, out epoch); return epoch; } }
+        public int Model { get { return comboBox1.SelectedIndex; } }
     }
 }
