@@ -21,7 +21,33 @@ namespace OmGui
             InitializeComponent();
             this.executableName = executableName;
             this.args = args;
+            buttonOK.Enabled = false;
         }
+
+
+        private void AppendText(string data)
+        {
+            if (InvokeRequired) { this.Invoke(new MethodInvoker(() => { AppendText(data); })); return; }
+
+            const int max = 8192;
+            if (textBoxProgress.Text.Length + data.Length > max)
+            {
+                string txt = textBoxProgress.Text + data;
+                txt = txt.Substring(txt.Length - max);
+                textBoxProgress.Text = txt;
+                textBoxProgress.Select(textBoxProgress.Text.Length, 0);
+                textBoxProgress.ScrollToCaret();
+            }
+            else
+            {
+                textBoxProgress.Select(textBoxProgress.Text.Length, 0);
+                textBoxProgress.SelectedText = data;
+                textBoxProgress.Select(textBoxProgress.Text.Length, 0);
+                textBoxProgress.ScrollToCaret();
+            }
+            Console.Out.Write(data);
+        }
+
 
         public bool Execute()
         {
@@ -40,54 +66,74 @@ namespace OmGui
             // Construct arguments
             processInformation.Arguments = string.Join(" ", this.args.ToArray());
             processInformation.UseShellExecute = false;
-            //processInformation.CreateNoWindow = true;
+            processInformation.CreateNoWindow = true;
             processInformation.RedirectStandardError = true;
             //processInformation.RedirectStandardOutput = true;
 
             Process conversionProcess = new Process();
             conversionProcess.EnableRaisingEvents = true;
             conversionProcess.StartInfo = processInformation;
+            /*
+            conversionProcess.OutputDataReceived += (sender, e) => {
+                AppendText(e.Data);
+            };
+            conversionProcess.ErrorDataReceived += (sender, e) => {
+                AppendText(e.Data);
+            };
+            */
 
+            AppendText("<<<START: " + conversionProcess.StartInfo.FileName + " " + conversionProcess.StartInfo.Arguments + ">>>\n");
             try
             {
                 conversionProcess.Start();
             }
             catch (Exception ex)
             {
+                AppendText("<<<ERROR: " + ex.Message+ ">>>\n");
                 Trace.WriteLine("ERROR: Problem running conversion process: " + ex.Message);
                 return false;
             }
 
-            char[] buffer = new char[2];
+            bool cancel = false;
+            StringBuilder sb = new StringBuilder();
             while (!conversionProcess.StandardError.EndOfStream)
             {
-                int offset = 0;
-                int length = conversionProcess.StandardError.ReadBlock(buffer, offset, buffer.Length);
-                if (length > 0)
+                if (conversionProcess.StandardError.Peek() < 0)
                 {
-                    string st = new string(buffer, offset, length);
-                    //Console.Out.Write(st);
-                    string txt = textBoxProgress.Text + st;
-                    if (txt.Length > 8192)
+                    AppendText(sb.ToString()); sb.Remove(0, sb.Length);
+                    System.Threading.Thread.Sleep(100);
+                }
+                else
+                {
+                    int ic = conversionProcess.StandardError.Read();
+                    if (ic < 0) { break; }
+                    char cc = (char)ic;
+                    sb.Append(cc);
+
+                    if (cc == 13 || sb.Length > 32)
                     {
-                        txt = txt.Substring(txt.Length - 8192);
+                        AppendText(sb.ToString()); sb.Remove(0, sb.Length);
                     }
-                    textBoxProgress.Text = txt;
-                    textBoxProgress.Select(textBoxProgress.Text.Length, 0);
-                    textBoxProgress.ScrollToCaret();
+                }
+                if (backgroundWorker.CancellationPending) 
+                {
+                    cancel = true;
+                    conversionProcess.Kill();
+                    break; 
                 }
             }
+            AppendText(sb.ToString()); sb.Remove(0, sb.Length);
+
+            AppendText("<<<WAIT>>>\n");
             conversionProcess.WaitForExit();
 
             int exitCode = conversionProcess.ExitCode;
-            if (exitCode != 0)
-            {
-                Trace.WriteLine("Conversion error (" + exitCode + ")");
-                //return false;
-            }
+            AppendText("<<<END: " + exitCode + ">>>\n");
 
-            return true;
+            if (cancel) { AppendText("<<<CANCELLED>>>\n"); }
+            return !cancel;
         }
+
 
 
         private bool cancelClose = true;
@@ -95,23 +141,44 @@ namespace OmGui
         private void ProcessingForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             e.Cancel = cancelClose;
+            //if (e.Cancel) { backgroundWorker.CancelAsync(); }
         }
 
         private void ProcessingForm_Load(object sender, EventArgs e)
         {
-            if (!Execute())
+            backgroundWorker.DoWork += (bws, bwe) =>
             {
-                this.DialogResult = DialogResult.Cancel;
+                if (Execute())
+                {
+                    buttonOK.Enabled = true;
+                }
+            };
+            backgroundWorker.RunWorkerCompleted += (bws, bwe) =>
+            {
                 cancelClose = false;
-//                this.Close();
-            }
-            this.DialogResult = DialogResult.OK;
-            cancelClose = false;
-            this.Close();
+                if (InvokeRequired) { this.Invoke(new MethodInvoker(() => { pictureBoxProgress.Visible = false; })); }                
+                //this.Close();
+            };
+
+            pictureBoxProgress.Visible = true;
+            backgroundWorker.RunWorkerAsync();
         }
+
 
         private void timerUpdate_Tick(object sender, EventArgs e)
         {
+        }
+
+        private void buttonCancel_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;
+            this.Close();
+        }
+
+        private void buttonOK_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.OK;
+            this.Close();
         }
 
     }
