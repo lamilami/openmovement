@@ -31,5 +31,10 @@ namespace OmGui
 
         public int Epoch { get { int epoch = 1; int.TryParse(comboBoxRate.Text, out epoch); return epoch; } }
         public int Model { get { return comboBox1.SelectedIndex; } }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

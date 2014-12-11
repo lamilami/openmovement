@@ -14,7 +14,7 @@ namespace OmGui
         public ExportSvmForm()
         {
             InitializeComponent();
-            comboBoxFilter.SelectedIndex = 0;
+            comboBoxFilter.SelectedIndex = 1;
             comboBoxMode.SelectedIndex = 0;
         }
 

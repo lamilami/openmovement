@@ -95,9 +95,9 @@
             "40",
             "60",
             "120"});
-            this.comboBoxRate.Location = new System.Drawing.Point(98, 32);
+            this.comboBoxRate.Location = new System.Drawing.Point(64, 32);
             this.comboBoxRate.Name = "comboBoxRate";
-            this.comboBoxRate.Size = new System.Drawing.Size(185, 24);
+            this.comboBoxRate.Size = new System.Drawing.Size(245, 24);
             this.comboBoxRate.TabIndex = 3;
             this.comboBoxRate.Text = "1";
             // 
@@ -105,20 +105,20 @@
             // 
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(289, 35);
+            this.label2.Location = new System.Drawing.Point(315, 35);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(70, 17);
+            this.label2.Size = new System.Drawing.Size(44, 17);
             this.label2.TabIndex = 2;
-            this.label2.Text = "* 0.5 mins";
+            this.label2.Text = "* 30 s";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(6, 35);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(59, 17);
+            this.label1.Size = new System.Drawing.Size(52, 17);
             this.label1.TabIndex = 2;
-            this.label1.Text = "Epochs:";
+            this.label1.Text = "Epoch:";
             // 
             // ExportWtvForm
             // 
