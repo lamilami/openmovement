@@ -161,6 +161,12 @@
     <Compile Include="ExportSvmForm.Designer.cs">
       <DependentUpon>ExportSvmForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ExportCsvForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ExportCsvForm.Designer.cs">
+      <DependentUpon>ExportCsvForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ExportWtvForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -259,6 +265,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ExportSvmForm.resx">
       <DependentUpon>ExportSvmForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ExportCsvForm.resx">
+      <DependentUpon>ExportCsvForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ExportWtvForm.resx">
       <DependentUpon>ExportWtvForm.cs</DependentUpon>

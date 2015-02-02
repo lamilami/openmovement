@@ -219,7 +219,7 @@ namespace OmGui
             {
                 for (; ; )  // [dump]
                 {
-                    string errorMessage = "Problem while appending to config log file (" + downloadDumpFile + ") - check the folder exists, you have write permission, and the file is not locked open by another process.";
+                    string errorMessage = "Problem while appending to download log file (" + downloadDumpFile + ") - check the folder exists, you have write permission, and the file is not locked open by another process.";
 
                     try
                     {
@@ -3821,7 +3821,7 @@ Application.DoEvents();
             ExportDataConstruct();
         }
 
-        string[] GetSelectedFilesToConvert(string newExtension, bool requiredWav)
+        string[] GetSelectedFilesToConvert(string newExtension, bool requiredWav, bool regenerateWav)
         {
             // Check no devices selected
             if (devicesListView.SelectedItems.Count > 0)
@@ -3830,13 +3830,15 @@ Application.DoEvents();
                 return null;
             }
 
-            // Check at least one file selected
+            // Get list of files selected
             List<string> files = new List<string>();
             foreach (ListViewItem item in filesListView.SelectedItems)
             {
                 OmReader reader = (OmReader)item.Tag;
                 files.Add(reader.Filename);
             }
+
+            // Check at least one file selected
             if (files.Count <= 0)
             {
                 DialogResult dr = MessageBox.Show(this, "No files selected.", "No files selected", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
@@ -3851,7 +3853,12 @@ Application.DoEvents();
                 foreach (string file in files)
                 {
                     string wavFile = Path.ChangeExtension(file, ".wav");
-                    if (File.Exists(wavFile))
+                    if (regenerateWav)
+                    {
+                        wavFiles.Add(file);
+                        sb.Append(".WAV regeneration requested: " + wavFile + "\r\n");
+                    }
+                    else if (File.Exists(wavFile))
                     {
                         DateTime sourceTime = DateTime.MinValue;
                         try { sourceTime = File.GetLastWriteTime(file); } catch { ; }
@@ -3861,24 +3868,42 @@ Application.DoEvents();
                         if (destinationTime < sourceTime)
                         {
                             wavFiles.Add(file);
-                            sb.Append(".WAV exists but is older than source: " + wavFile + "\r\n");
+                            sb.Append(".WAV conversion older than source file: " + wavFile + "\r\n");
                         }
                     }
                     else
                     {
                         wavFiles.Add(file);
-                        sb.Append(".WAV conversion does not exist: " + wavFile + "\r\n");
+                        sb.Append(".WAV conversion required: " + wavFile + "\r\n");
                     }
                 }
 
                 // Overwrite prompt
                 if (sb.Length > 0)
                 {
-                    DialogResult dr = MessageBox.Show(this, "One or more files needs resampling to .WAV format first:\r\n\r\n" + sb.ToString() + "\r\nAre you sure you want to overwrite?", "Resample to WAV first?", MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+                    DialogResult dr = MessageBox.Show(this, "One or more files needs resampling to .WAV format first:\r\n\r\n" + sb.ToString() + "\r\n", "Resample to WAV first?", MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
                     if (dr == DialogResult.OK)
                     {
-                        DoWavConvert(wavFiles.ToArray());
-                        return null;
+                        if (!DoWavConvert(wavFiles.ToArray()))
+                        {
+                            return null;
+                        }
+
+                        // Confirm converted files exist
+                        sb = new StringBuilder();
+                        foreach (string wavFile in wavFiles)
+                        {
+                            if (!File.Exists(wavFile)) 
+                            {
+                                sb.Append(wavFile + "\r\n");
+                            }
+                        }
+                        if (sb.Length > 0)
+                        {
+                            MessageBox.Show(this, "One or more requied .WAV files is missing:\r\n\r\n" + sb.ToString() + "\r\n", "Files missing after conversion", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1);
+                            return null;
+                        }
+
                     }
                     else
                     {
@@ -3930,12 +3955,12 @@ Application.DoEvents();
 
         private static string OMCONVERT_EXE = @"Plugins\OmConvertPlugin\omconvert.exe";
 
-        private void DoWavConvert(string[] files)
+        private bool DoWavConvert(string[] files)
         {
-            if (files == null) { return; }
+            if (files == null) { return false; }
             ExportWavForm optionsForm = new ExportWavForm();
             DialogResult dr = optionsForm.ShowDialog();
-            if (dr != System.Windows.Forms.DialogResult.OK) { return; }
+            if (dr != System.Windows.Forms.DialogResult.OK) { return false; }
             foreach (string file in files)
             {
                 List<string> args = new List<string>();
@@ -3945,8 +3970,9 @@ Application.DoEvents();
                 args.Add("-out"); args.Add("\"" + Path.ChangeExtension(file, ".wav") + "\"");
                 ProcessingForm processingForm = new ProcessingForm(OMCONVERT_EXE, args);
                 dr = processingForm.ShowDialog();
-                if (dr == System.Windows.Forms.DialogResult.Cancel) { break; }
+                if (dr == System.Windows.Forms.DialogResult.Cancel) { return false; }
             }
+            return true;
         }
 
 
@@ -3957,7 +3983,7 @@ Application.DoEvents();
             //  * - Interpolated sample rate (100Hz, 50Hz, 25Hz)
             //  * - No auto-calibrate
             //  * (note: derived summaries can be affected by the sample rate)
-            string[] files = GetSelectedFilesToConvert(".wav", false);
+            string[] files = GetSelectedFilesToConvert(".wav", false, false);
             if (files == null) { return; }
             DoWavConvert(files);
         }
@@ -3969,8 +3995,8 @@ Application.DoEvents();
             // Make .SVM.CSV
             //  * Epoch (60 seconds)
             //  * Filter (off, 0.5-20Hz)
-            //  * Mode: abs(sum(svm-1)) vs max(0,sum(svm-1(
-            string[] files = GetSelectedFilesToConvert(".svm.csv", true);
+            //  * Mode: abs(sum(svm-1)) vs sum(max(0,svm-1))
+            string[] files = GetSelectedFilesToConvert(".svm.csv", true, (Control.ModifierKeys & Keys.Shift) != 0);
             if (files == null) { return; }
             ExportSvmForm optionsForm = new ExportSvmForm();
             DialogResult dr = optionsForm.ShowDialog();
@@ -3994,7 +4020,7 @@ Application.DoEvents();
             // Make .PAEE.CSV
             //  * Epochs (number of 1 minute periods)
             //  * Model (dominant/"right" hand, non-dominant/"left" hand, weight)
-            string[] files = GetSelectedFilesToConvert(".paee.csv", true);
+            string[] files = GetSelectedFilesToConvert(".paee.csv", true, (Control.ModifierKeys & Keys.Shift) != 0);
             if (files == null) { return; }
             ExportPaeeForm optionsForm = new ExportPaeeForm();
             DialogResult dr = optionsForm.ShowDialog();
@@ -4016,7 +4042,7 @@ Application.DoEvents();
         {
             // Make .WTV.CSV
             //  * Epochs (number of 0.5 minute periods)
-            string[] files = GetSelectedFilesToConvert(".wtv.csv", true);
+            string[] files = GetSelectedFilesToConvert(".wtv.csv", true, (Control.ModifierKeys & Keys.Shift) != 0);
             if (files == null) { return; }
             ExportWtvForm optionsForm = new ExportWtvForm();
             DialogResult dr = optionsForm.ShowDialog();
@@ -4027,6 +4053,25 @@ Application.DoEvents();
                 args.Add("\"" + Path.ChangeExtension(file, ".wav") + "\"");
                 args.Add("-wtv-epoch"); args.Add("" + optionsForm.Epoch);
                 args.Add("-wtv-file"); args.Add("\"" + Path.ChangeExtension(file, ".wtv.csv") + "\"");
+                ProcessingForm processingForm = new ProcessingForm(OMCONVERT_EXE, args);
+                dr = processingForm.ShowDialog();
+                if (dr == System.Windows.Forms.DialogResult.Cancel) { break; }
+            }
+        }
+
+        private void toolStripButtonCSV_Click(object sender, EventArgs e)
+        {
+            // Make .CSV (resampled)
+            string[] files = GetSelectedFilesToConvert(".resampled.csv", true, (Control.ModifierKeys & Keys.Shift) != 0);
+            if (files == null) { return; }
+            ExportCsvForm optionsForm = new ExportCsvForm();
+            DialogResult dr = optionsForm.ShowDialog();
+            if (dr != System.Windows.Forms.DialogResult.OK) { return; }
+            foreach (string file in files)
+            {
+                List<string> args = new List<string>();
+                args.Add("\"" + Path.ChangeExtension(file, ".wav") + "\"");
+                args.Add("-csv-file"); args.Add("\"" + Path.ChangeExtension(file, ".resampled.csv") + "\"");
                 ProcessingForm processingForm = new ProcessingForm(OMCONVERT_EXE, args);
                 dr = processingForm.ShowDialog();
                 if (dr == System.Windows.Forms.DialogResult.Cancel) { break; }

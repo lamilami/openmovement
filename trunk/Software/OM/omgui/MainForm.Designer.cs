@@ -29,15 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.ListViewGroup listViewGroup28 = new System.Windows.Forms.ListViewGroup("Devices", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup29 = new System.Windows.Forms.ListViewGroup("New Data", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup30 = new System.Windows.Forms.ListViewGroup("Downloading", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup31 = new System.Windows.Forms.ListViewGroup("Downloaded", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup32 = new System.Windows.Forms.ListViewGroup("Charging", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup33 = new System.Windows.Forms.ListViewGroup("Standby", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup34 = new System.Windows.Forms.ListViewGroup("Outbox", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup35 = new System.Windows.Forms.ListViewGroup("Removed", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup36 = new System.Windows.Forms.ListViewGroup("Files", System.Windows.Forms.HorizontalAlignment.Left);
             System.Windows.Forms.ListViewGroup listViewGroup37 = new System.Windows.Forms.ListViewGroup("Devices", System.Windows.Forms.HorizontalAlignment.Left);
             System.Windows.Forms.ListViewGroup listViewGroup38 = new System.Windows.Forms.ListViewGroup("New Data", System.Windows.Forms.HorizontalAlignment.Left);
             System.Windows.Forms.ListViewGroup listViewGroup39 = new System.Windows.Forms.ListViewGroup("Downloading", System.Windows.Forms.HorizontalAlignment.Left);
@@ -56,6 +47,24 @@
             System.Windows.Forms.ListViewGroup listViewGroup52 = new System.Windows.Forms.ListViewGroup("Outbox", System.Windows.Forms.HorizontalAlignment.Left);
             System.Windows.Forms.ListViewGroup listViewGroup53 = new System.Windows.Forms.ListViewGroup("Removed", System.Windows.Forms.HorizontalAlignment.Left);
             System.Windows.Forms.ListViewGroup listViewGroup54 = new System.Windows.Forms.ListViewGroup("Files", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup55 = new System.Windows.Forms.ListViewGroup("Devices", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup56 = new System.Windows.Forms.ListViewGroup("New Data", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup57 = new System.Windows.Forms.ListViewGroup("Downloading", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup58 = new System.Windows.Forms.ListViewGroup("Downloaded", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup59 = new System.Windows.Forms.ListViewGroup("Charging", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup60 = new System.Windows.Forms.ListViewGroup("Standby", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup61 = new System.Windows.Forms.ListViewGroup("Outbox", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup62 = new System.Windows.Forms.ListViewGroup("Removed", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup63 = new System.Windows.Forms.ListViewGroup("Files", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup64 = new System.Windows.Forms.ListViewGroup("Devices", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup65 = new System.Windows.Forms.ListViewGroup("New Data", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup66 = new System.Windows.Forms.ListViewGroup("Downloading", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup67 = new System.Windows.Forms.ListViewGroup("Downloaded", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup68 = new System.Windows.Forms.ListViewGroup("Charging", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup69 = new System.Windows.Forms.ListViewGroup("Standby", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup70 = new System.Windows.Forms.ListViewGroup("Outbox", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup71 = new System.Windows.Forms.ListViewGroup("Removed", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup72 = new System.Windows.Forms.ListViewGroup("Files", System.Windows.Forms.HorizontalAlignment.Left);
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.refreshTimer = new System.Windows.Forms.Timer(this.components);
             this.fileSystemWatcher = new System.IO.FileSystemWatcher();
@@ -153,6 +162,7 @@
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
             this.fileSystemWatcherOutput = new System.IO.FileSystemWatcher();
             this.backgroundWorkerUpdate = new System.ComponentModel.BackgroundWorker();
+            this.toolStripButtonCSV = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher)).BeginInit();
             this.toolStripContainer2.SuspendLayout();
             this.statusStripMain.SuspendLayout();
@@ -687,24 +697,6 @@
             this.devicesListView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.devicesListView.FullRowSelect = true;
             this.devicesListView.GridLines = true;
-            listViewGroup28.Header = "Devices";
-            listViewGroup28.Name = "Other";
-            listViewGroup29.Header = "New Data";
-            listViewGroup29.Name = "NewData";
-            listViewGroup30.Header = "Downloading";
-            listViewGroup30.Name = "Downloading";
-            listViewGroup31.Header = "Downloaded";
-            listViewGroup31.Name = "Downloaded";
-            listViewGroup32.Header = "Charging";
-            listViewGroup32.Name = "Charging";
-            listViewGroup33.Header = "Standby";
-            listViewGroup33.Name = "Standby";
-            listViewGroup34.Header = "Outbox";
-            listViewGroup34.Name = "Outbox";
-            listViewGroup35.Header = "Removed";
-            listViewGroup35.Name = "Removed";
-            listViewGroup36.Header = "Files";
-            listViewGroup36.Name = "File";
             listViewGroup37.Header = "Devices";
             listViewGroup37.Name = "Other";
             listViewGroup38.Header = "New Data";
@@ -741,16 +733,43 @@
             listViewGroup53.Name = "Removed";
             listViewGroup54.Header = "Files";
             listViewGroup54.Name = "File";
+            listViewGroup55.Header = "Devices";
+            listViewGroup55.Name = "Other";
+            listViewGroup56.Header = "New Data";
+            listViewGroup56.Name = "NewData";
+            listViewGroup57.Header = "Downloading";
+            listViewGroup57.Name = "Downloading";
+            listViewGroup58.Header = "Downloaded";
+            listViewGroup58.Name = "Downloaded";
+            listViewGroup59.Header = "Charging";
+            listViewGroup59.Name = "Charging";
+            listViewGroup60.Header = "Standby";
+            listViewGroup60.Name = "Standby";
+            listViewGroup61.Header = "Outbox";
+            listViewGroup61.Name = "Outbox";
+            listViewGroup62.Header = "Removed";
+            listViewGroup62.Name = "Removed";
+            listViewGroup63.Header = "Files";
+            listViewGroup63.Name = "File";
+            listViewGroup64.Header = "Devices";
+            listViewGroup64.Name = "Other";
+            listViewGroup65.Header = "New Data";
+            listViewGroup65.Name = "NewData";
+            listViewGroup66.Header = "Downloading";
+            listViewGroup66.Name = "Downloading";
+            listViewGroup67.Header = "Downloaded";
+            listViewGroup67.Name = "Downloaded";
+            listViewGroup68.Header = "Charging";
+            listViewGroup68.Name = "Charging";
+            listViewGroup69.Header = "Standby";
+            listViewGroup69.Name = "Standby";
+            listViewGroup70.Header = "Outbox";
+            listViewGroup70.Name = "Outbox";
+            listViewGroup71.Header = "Removed";
+            listViewGroup71.Name = "Removed";
+            listViewGroup72.Header = "Files";
+            listViewGroup72.Name = "File";
             this.devicesListView.Groups.AddRange(new System.Windows.Forms.ListViewGroup[] {
-            listViewGroup28,
-            listViewGroup29,
-            listViewGroup30,
-            listViewGroup31,
-            listViewGroup32,
-            listViewGroup33,
-            listViewGroup34,
-            listViewGroup35,
-            listViewGroup36,
             listViewGroup37,
             listViewGroup38,
             listViewGroup39,
@@ -768,7 +787,25 @@
             listViewGroup51,
             listViewGroup52,
             listViewGroup53,
-            listViewGroup54});
+            listViewGroup54,
+            listViewGroup55,
+            listViewGroup56,
+            listViewGroup57,
+            listViewGroup58,
+            listViewGroup59,
+            listViewGroup60,
+            listViewGroup61,
+            listViewGroup62,
+            listViewGroup63,
+            listViewGroup64,
+            listViewGroup65,
+            listViewGroup66,
+            listViewGroup67,
+            listViewGroup68,
+            listViewGroup69,
+            listViewGroup70,
+            listViewGroup71,
+            listViewGroup72});
             this.devicesListView.HideSelection = false;
             this.devicesListView.LabelWrap = false;
             this.devicesListView.Location = new System.Drawing.Point(0, 0);
@@ -902,6 +939,7 @@
             this.toolStripButtonSvm,
             this.toolStripButtonCutPoints,
             this.toolStripButtonWearTime,
+            this.toolStripButtonCSV,
             this.toolStripSeparator10,
             this.pluginsToolStripButton,
             this.toolStripSeparator9,
@@ -924,9 +962,9 @@
             this.toolStripButtonExport.Image = global::OmGui.Properties.Resources.Export;
             this.toolStripButtonExport.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonExport.Name = "toolStripButtonExport";
-            this.toolStripButtonExport.Size = new System.Drawing.Size(129, 24);
-            this.toolStripButtonExport.Text = "Export to CSV...";
-            this.toolStripButtonExport.ToolTipText = "Export a .CWA file to .CSV";
+            this.toolStripButtonExport.Size = new System.Drawing.Size(109, 24);
+            this.toolStripButtonExport.Text = "Export raw...";
+            this.toolStripButtonExport.ToolTipText = "Export raw data to .CSV (without resampling or calibration)";
             this.toolStripButtonExport.Click += new System.EventHandler(this.exportToolStripMenuItem_Click);
             // 
             // toolStripButtonWav
@@ -936,7 +974,7 @@
             this.toolStripButtonWav.Name = "toolStripButtonWav";
             this.toolStripButtonWav.Size = new System.Drawing.Size(158, 24);
             this.toolStripButtonWav.Text = "Resample to WAV...";
-            this.toolStripButtonWav.ToolTipText = "Resample a .CWA file to .WAV";
+            this.toolStripButtonWav.ToolTipText = "Resample a .CWA file to .WAV and apply calibration";
             this.toolStripButtonWav.Click += new System.EventHandler(this.wavToolStripMenuItem_Click);
             // 
             // toolStripButtonSvm
@@ -946,7 +984,7 @@
             this.toolStripButtonSvm.Name = "toolStripButtonSvm";
             this.toolStripButtonSvm.Size = new System.Drawing.Size(68, 24);
             this.toolStripButtonSvm.Text = "SVM...";
-            this.toolStripButtonSvm.ToolTipText = "Calculate the SVM";
+            this.toolStripButtonSvm.ToolTipText = "Calculate the scalar vector magnitude";
             this.toolStripButtonSvm.Click += new System.EventHandler(this.svmToolStripMenuItem_Click);
             // 
             // toolStripButtonCutPoints
@@ -1201,6 +1239,16 @@
             // 
             this.backgroundWorkerUpdate.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorkerUpdate_DoWork);
             // 
+            // toolStripButtonCSV
+            // 
+            this.toolStripButtonCSV.Image = global::OmGui.Properties.Resources.Export;
+            this.toolStripButtonCSV.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonCSV.Name = "toolStripButtonCSV";
+            this.toolStripButtonCSV.Size = new System.Drawing.Size(111, 24);
+            this.toolStripButtonCSV.Text = "Export CSV...";
+            this.toolStripButtonCSV.ToolTipText = "Export resampled accelerometer data to .CSV";
+            this.toolStripButtonCSV.Click += new System.EventHandler(this.toolStripButtonCSV_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -1357,6 +1405,7 @@
         private System.Windows.Forms.ToolStripMenuItem svmToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cutPointsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem wearTimeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripButton toolStripButtonCSV;
     }
 }
 
