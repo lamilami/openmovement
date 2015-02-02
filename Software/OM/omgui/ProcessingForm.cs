@@ -91,6 +91,7 @@ namespace OmGui
             {
                 AppendText("<<<ERROR: " + ex.Message+ ">>>\n");
                 Trace.WriteLine("ERROR: Problem running conversion process: " + ex.Message);
+                MessageBox.Show(this, "Problem running conversion process " + ex.Message + ".", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
                 return false;
             }
 

@@ -74,7 +74,7 @@
             // 
             this.buttonConvert.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonConvert.Location = new System.Drawing.Point(355, 489);
-            this.buttonConvert.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonConvert.Margin = new System.Windows.Forms.Padding(4);
             this.buttonConvert.Name = "buttonConvert";
             this.buttonConvert.Size = new System.Drawing.Size(100, 28);
             this.buttonConvert.TabIndex = 0;
@@ -87,7 +87,7 @@
             this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonCancel.Location = new System.Drawing.Point(464, 489);
-            this.buttonCancel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonCancel.Margin = new System.Windows.Forms.Padding(4);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(100, 28);
             this.buttonCancel.TabIndex = 1;
@@ -126,7 +126,7 @@
             this.textBoxSourceFile.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxSourceFile.Location = new System.Drawing.Point(121, 15);
-            this.textBoxSourceFile.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBoxSourceFile.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxSourceFile.Name = "textBoxSourceFile";
             this.textBoxSourceFile.ReadOnly = true;
             this.textBoxSourceFile.Size = new System.Drawing.Size(441, 22);
@@ -137,7 +137,7 @@
             this.textBoxOutputFile.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxOutputFile.Location = new System.Drawing.Point(121, 52);
-            this.textBoxOutputFile.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBoxOutputFile.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxOutputFile.Name = "textBoxOutputFile";
             this.textBoxOutputFile.Size = new System.Drawing.Size(328, 22);
             this.textBoxOutputFile.TabIndex = 8;
@@ -146,7 +146,7 @@
             // 
             this.buttonBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonBrowse.Location = new System.Drawing.Point(468, 52);
-            this.buttonBrowse.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonBrowse.Margin = new System.Windows.Forms.Padding(4);
             this.buttonBrowse.Name = "buttonBrowse";
             this.buttonBrowse.Size = new System.Drawing.Size(95, 28);
             this.buttonBrowse.TabIndex = 9;
@@ -159,9 +159,9 @@
             this.groupBoxStream.Controls.Add(this.radioButtonStreamGyro);
             this.groupBoxStream.Controls.Add(this.radioButtonStreamAccel);
             this.groupBoxStream.Location = new System.Drawing.Point(20, 92);
-            this.groupBoxStream.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBoxStream.Margin = new System.Windows.Forms.Padding(4);
             this.groupBoxStream.Name = "groupBoxStream";
-            this.groupBoxStream.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBoxStream.Padding = new System.Windows.Forms.Padding(4);
             this.groupBoxStream.Size = new System.Drawing.Size(263, 82);
             this.groupBoxStream.TabIndex = 10;
             this.groupBoxStream.TabStop = false;
@@ -171,7 +171,7 @@
             // 
             this.radioButtonStreamGyro.AutoSize = true;
             this.radioButtonStreamGyro.Location = new System.Drawing.Point(8, 52);
-            this.radioButtonStreamGyro.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.radioButtonStreamGyro.Margin = new System.Windows.Forms.Padding(4);
             this.radioButtonStreamGyro.Name = "radioButtonStreamGyro";
             this.radioButtonStreamGyro.Size = new System.Drawing.Size(98, 21);
             this.radioButtonStreamGyro.TabIndex = 0;
@@ -183,7 +183,7 @@
             this.radioButtonStreamAccel.AutoSize = true;
             this.radioButtonStreamAccel.Checked = true;
             this.radioButtonStreamAccel.Location = new System.Drawing.Point(8, 23);
-            this.radioButtonStreamAccel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.radioButtonStreamAccel.Margin = new System.Windows.Forms.Padding(4);
             this.radioButtonStreamAccel.Name = "radioButtonStreamAccel";
             this.radioButtonStreamAccel.Size = new System.Drawing.Size(120, 21);
             this.radioButtonStreamAccel.TabIndex = 0;
@@ -196,9 +196,9 @@
             this.groupBoxValues.Controls.Add(this.radioButtonValuesInt);
             this.groupBoxValues.Controls.Add(this.radioButtonValuesFloat);
             this.groupBoxValues.Location = new System.Drawing.Point(20, 182);
-            this.groupBoxValues.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBoxValues.Margin = new System.Windows.Forms.Padding(4);
             this.groupBoxValues.Name = "groupBoxValues";
-            this.groupBoxValues.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBoxValues.Padding = new System.Windows.Forms.Padding(4);
             this.groupBoxValues.Size = new System.Drawing.Size(263, 87);
             this.groupBoxValues.TabIndex = 10;
             this.groupBoxValues.TabStop = false;
@@ -208,7 +208,7 @@
             // 
             this.radioButtonValuesInt.AutoSize = true;
             this.radioButtonValuesInt.Location = new System.Drawing.Point(8, 52);
-            this.radioButtonValuesInt.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.radioButtonValuesInt.Margin = new System.Windows.Forms.Padding(4);
             this.radioButtonValuesInt.Name = "radioButtonValuesInt";
             this.radioButtonValuesInt.Size = new System.Drawing.Size(56, 21);
             this.radioButtonValuesInt.TabIndex = 0;
@@ -220,7 +220,7 @@
             this.radioButtonValuesFloat.AutoSize = true;
             this.radioButtonValuesFloat.Checked = true;
             this.radioButtonValuesFloat.Location = new System.Drawing.Point(8, 23);
-            this.radioButtonValuesFloat.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.radioButtonValuesFloat.Margin = new System.Windows.Forms.Padding(4);
             this.radioButtonValuesFloat.Name = "radioButtonValuesFloat";
             this.radioButtonValuesFloat.Size = new System.Drawing.Size(40, 21);
             this.radioButtonValuesFloat.TabIndex = 0;
@@ -239,9 +239,9 @@
             this.groupBoxTimestamps.Controls.Add(this.radioButtonTimeSequence);
             this.groupBoxTimestamps.Controls.Add(this.radioButtonTimeNone);
             this.groupBoxTimestamps.Location = new System.Drawing.Point(291, 98);
-            this.groupBoxTimestamps.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBoxTimestamps.Margin = new System.Windows.Forms.Padding(4);
             this.groupBoxTimestamps.Name = "groupBoxTimestamps";
-            this.groupBoxTimestamps.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBoxTimestamps.Padding = new System.Windows.Forms.Padding(4);
             this.groupBoxTimestamps.Size = new System.Drawing.Size(273, 258);
             this.groupBoxTimestamps.TabIndex = 10;
             this.groupBoxTimestamps.TabStop = false;
@@ -252,7 +252,7 @@
             this.radioButtonTimeTimestamp.AutoSize = true;
             this.radioButtonTimeTimestamp.Checked = true;
             this.radioButtonTimeTimestamp.Location = new System.Drawing.Point(8, 80);
-            this.radioButtonTimeTimestamp.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.radioButtonTimeTimestamp.Margin = new System.Windows.Forms.Padding(4);
             this.radioButtonTimeTimestamp.Name = "radioButtonTimeTimestamp";
             this.radioButtonTimeTimestamp.Size = new System.Drawing.Size(193, 21);
             this.radioButtonTimeTimestamp.TabIndex = 0;
@@ -264,7 +264,7 @@
             // 
             this.radioButtonTimeMatlab.AutoSize = true;
             this.radioButtonTimeMatlab.Location = new System.Drawing.Point(8, 222);
-            this.radioButtonTimeMatlab.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.radioButtonTimeMatlab.Margin = new System.Windows.Forms.Padding(4);
             this.radioButtonTimeMatlab.Name = "radioButtonTimeMatlab";
             this.radioButtonTimeMatlab.Size = new System.Drawing.Size(183, 21);
             this.radioButtonTimeMatlab.TabIndex = 0;
@@ -275,7 +275,7 @@
             // 
             this.radioButtonTimeExcel.AutoSize = true;
             this.radioButtonTimeExcel.Location = new System.Drawing.Point(8, 193);
-            this.radioButtonTimeExcel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.radioButtonTimeExcel.Margin = new System.Windows.Forms.Padding(4);
             this.radioButtonTimeExcel.Name = "radioButtonTimeExcel";
             this.radioButtonTimeExcel.Size = new System.Drawing.Size(174, 21);
             this.radioButtonTimeExcel.TabIndex = 0;
@@ -286,7 +286,7 @@
             // 
             this.radioButtonTimeDays.AutoSize = true;
             this.radioButtonTimeDays.Location = new System.Drawing.Point(8, 165);
-            this.radioButtonTimeDays.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.radioButtonTimeDays.Margin = new System.Windows.Forms.Padding(4);
             this.radioButtonTimeDays.Name = "radioButtonTimeDays";
             this.radioButtonTimeDays.Size = new System.Drawing.Size(187, 21);
             this.radioButtonTimeDays.TabIndex = 0;
@@ -297,7 +297,7 @@
             // 
             this.radioButtonTimeSerial.AutoSize = true;
             this.radioButtonTimeSerial.Location = new System.Drawing.Point(8, 137);
-            this.radioButtonTimeSerial.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.radioButtonTimeSerial.Margin = new System.Windows.Forms.Padding(4);
             this.radioButtonTimeSerial.Name = "radioButtonTimeSerial";
             this.radioButtonTimeSerial.Size = new System.Drawing.Size(168, 21);
             this.radioButtonTimeSerial.TabIndex = 0;
@@ -308,7 +308,7 @@
             // 
             this.radioButtonTimeSecs.AutoSize = true;
             this.radioButtonTimeSecs.Location = new System.Drawing.Point(8, 108);
-            this.radioButtonTimeSecs.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.radioButtonTimeSecs.Margin = new System.Windows.Forms.Padding(4);
             this.radioButtonTimeSecs.Name = "radioButtonTimeSecs";
             this.radioButtonTimeSecs.Size = new System.Drawing.Size(144, 21);
             this.radioButtonTimeSecs.TabIndex = 0;
@@ -319,7 +319,7 @@
             // 
             this.radioButtonTimeSequence.AutoSize = true;
             this.radioButtonTimeSequence.Location = new System.Drawing.Point(8, 52);
-            this.radioButtonTimeSequence.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.radioButtonTimeSequence.Margin = new System.Windows.Forms.Padding(4);
             this.radioButtonTimeSequence.Name = "radioButtonTimeSequence";
             this.radioButtonTimeSequence.Size = new System.Drawing.Size(130, 21);
             this.radioButtonTimeSequence.TabIndex = 0;
@@ -330,7 +330,7 @@
             // 
             this.radioButtonTimeNone.AutoSize = true;
             this.radioButtonTimeNone.Location = new System.Drawing.Point(8, 23);
-            this.radioButtonTimeNone.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.radioButtonTimeNone.Margin = new System.Windows.Forms.Padding(4);
             this.radioButtonTimeNone.Name = "radioButtonTimeNone";
             this.radioButtonTimeNone.Size = new System.Drawing.Size(63, 21);
             this.radioButtonTimeNone.TabIndex = 0;
@@ -346,9 +346,9 @@
             this.groupBoxSubSample.Controls.Add(this.labelSampleCount);
             this.groupBoxSubSample.Controls.Add(this.labelSampleFirst);
             this.groupBoxSubSample.Location = new System.Drawing.Point(20, 277);
-            this.groupBoxSubSample.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBoxSubSample.Margin = new System.Windows.Forms.Padding(4);
             this.groupBoxSubSample.Name = "groupBoxSubSample";
-            this.groupBoxSubSample.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBoxSubSample.Padding = new System.Windows.Forms.Padding(4);
             this.groupBoxSubSample.Size = new System.Drawing.Size(263, 135);
             this.groupBoxSubSample.TabIndex = 10;
             this.groupBoxSubSample.TabStop = false;
@@ -359,7 +359,7 @@
             this.textBoxSampleStep.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxSampleStep.Location = new System.Drawing.Point(73, 92);
-            this.textBoxSampleStep.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBoxSampleStep.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxSampleStep.Name = "textBoxSampleStep";
             this.textBoxSampleStep.Size = new System.Drawing.Size(180, 22);
             this.textBoxSampleStep.TabIndex = 1;
@@ -369,7 +369,7 @@
             this.textBoxSampleLength.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxSampleLength.Location = new System.Drawing.Point(73, 60);
-            this.textBoxSampleLength.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBoxSampleLength.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxSampleLength.Name = "textBoxSampleLength";
             this.textBoxSampleLength.Size = new System.Drawing.Size(180, 22);
             this.textBoxSampleLength.TabIndex = 1;
@@ -379,7 +379,7 @@
             this.textBoxSampleStart.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxSampleStart.Location = new System.Drawing.Point(73, 28);
-            this.textBoxSampleStart.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBoxSampleStart.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxSampleStart.Name = "textBoxSampleStart";
             this.textBoxSampleStart.Size = new System.Drawing.Size(180, 22);
             this.textBoxSampleStart.TabIndex = 1;
@@ -421,9 +421,9 @@
             this.groupBox1.Controls.Add(this.labelBlockCount);
             this.groupBox1.Controls.Add(this.labelBlockStart);
             this.groupBox1.Location = new System.Drawing.Point(20, 420);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox1.Size = new System.Drawing.Size(263, 92);
             this.groupBox1.TabIndex = 10;
             this.groupBox1.TabStop = false;
@@ -434,7 +434,7 @@
             this.textBoxBlockCount.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxBlockCount.Location = new System.Drawing.Point(73, 60);
-            this.textBoxBlockCount.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBoxBlockCount.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxBlockCount.Name = "textBoxBlockCount";
             this.textBoxBlockCount.Size = new System.Drawing.Size(180, 22);
             this.textBoxBlockCount.TabIndex = 1;
@@ -444,7 +444,7 @@
             this.textBoxBlockStart.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxBlockStart.Location = new System.Drawing.Point(73, 28);
-            this.textBoxBlockStart.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBoxBlockStart.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxBlockStart.Name = "textBoxBlockStart";
             this.textBoxBlockStart.Size = new System.Drawing.Size(180, 22);
             this.textBoxBlockStart.TabIndex = 1;
@@ -488,13 +488,13 @@
             this.Controls.Add(this.buttonBrowse);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonConvert);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ExportForm";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
-            this.Text = "Export to CSV";
+            this.Text = "Export raw data";
             this.Load += new System.EventHandler(this.ExportForm_Load);
             this.groupBoxStream.ResumeLayout(false);
             this.groupBoxStream.PerformLayout();
