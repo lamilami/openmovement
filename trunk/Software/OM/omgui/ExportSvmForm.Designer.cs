@@ -190,6 +190,7 @@
             this.Controls.Add(this.buttonResample);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ExportSvmForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "SVM";
             this.Load += new System.EventHandler(this.ExportSvmForm_Load);
             this.groupBox1.ResumeLayout(false);

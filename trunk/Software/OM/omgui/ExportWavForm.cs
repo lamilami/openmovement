@@ -33,7 +33,7 @@ namespace OmGui
 
         }
 
-        public int Rate { get { int rate = 100; int.TryParse(comboBoxRate.Text, out rate); return rate; } }
+        public int Rate { get { int rate = -1; int.TryParse(comboBoxRate.Text, out rate); return rate; } }
         public bool AutoCalibrate { get { return checkBoxAutoCalibrate.Checked; } }
     }
 }

@@ -3,16 +3,16 @@
 [Setup]
 AppId={{8CDD410D-4556-4A8A-BF86-D67276A10EA5}
 AppName=OmGui
-AppVersion=1.0.0.24
-;AppVerName=OmGui 1.0.0.23
+AppVersion=1.0.0.25
+;AppVerName=OmGui 1.0.0.25
 AppPublisher=Open Movement
 AppPublisherURL=http://www.openmovement.co.uk
 AppSupportURL=http://www.openmovement.co.uk
 AppUpdatesURL=http://www.openmovement.co.uk
-DefaultDirName={pf}\Open Movement\OM GUI beta
-DefaultGroupName=OmGui beta
+DefaultDirName={pf}\Open Movement\OM GUI
+DefaultGroupName=OmGui
 AllowNoIcons=yes
-OutputBaseFilename=AX3-GUI-beta-24
+OutputBaseFilename=AX3-GUI-25
 SetupIconFile=Application Icon.ico
 Compression=zip
 SolidCompression=no
