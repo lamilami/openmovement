@@ -11,16 +11,36 @@ using System.Windows.Forms;
 
 namespace OmGui
 {
+    /*
+    public class ProcessingStep
+    {
+        public ProcessingStep(string executableName, string[] args)
+        {
+            this.ExecutableName = executableName;
+            this.Args = args;
+        }
+
+        public string ExecutableName { get; protected set; }
+        public string[] Args { get; protected set; }
+    }
+    */
+
     public partial class ProcessingForm : Form
     {
         private string executableName;
         private List<string> args;
+        private string outputFile;
+        private string finalFile;
+        private bool autoClose;
 
-        public ProcessingForm(string executableName, List<string> args)
+        public ProcessingForm(string executableName, List<string> args, string outputFile, string finalFile)
         {
             InitializeComponent();
             this.executableName = executableName;
             this.args = args;
+            this.outputFile = outputFile;
+            this.finalFile = finalFile;
+            this.autoClose = true;
             buttonOK.Enabled = false;
         }
 
@@ -47,7 +67,6 @@ namespace OmGui
             }
             Console.Out.Write(data);
         }
-
 
         public bool Execute()
         {
@@ -97,11 +116,17 @@ namespace OmGui
 
             bool cancel = false;
             StringBuilder sb = new StringBuilder();
+            DateTime lastAppended = DateTime.Now;
             while (!conversionProcess.StandardError.EndOfStream)
             {
                 if (conversionProcess.StandardError.Peek() < 0)
                 {
-                    AppendText(sb.ToString()); sb.Remove(0, sb.Length);
+                    if (DateTime.Now - lastAppended > TimeSpan.FromMilliseconds(250))
+                    {
+                        lastAppended = DateTime.Now;
+                        AppendText(sb.ToString());
+                        sb.Remove(0, sb.Length);
+                    }
                     System.Threading.Thread.Sleep(100);
                 }
                 else
@@ -110,11 +135,6 @@ namespace OmGui
                     if (ic < 0) { break; }
                     char cc = (char)ic;
                     sb.Append(cc);
-
-                    if (cc == 13 || sb.Length > 32)
-                    {
-                        AppendText(sb.ToString()); sb.Remove(0, sb.Length);
-                    }
                 }
                 if (backgroundWorker.CancellationPending) 
                 {
@@ -123,7 +143,8 @@ namespace OmGui
                     break; 
                 }
             }
-            AppendText(sb.ToString()); sb.Remove(0, sb.Length);
+            AppendText(sb.ToString()); 
+            sb.Remove(0, sb.Length);
 
             AppendText("<<<WAIT>>>\n");
             conversionProcess.WaitForExit();
@@ -131,8 +152,16 @@ namespace OmGui
             int exitCode = conversionProcess.ExitCode;
             AppendText("<<<END: " + exitCode + ">>>\n");
 
-            if (cancel) { AppendText("<<<CANCELLED>>>\n"); }
-            return !cancel;
+            if (cancel || exitCode != 0)
+            {
+                if (cancel) { AppendText("<<<CANCELLED>>>\n"); }
+                else { AppendText("<<<FAILED>>>\n"); }
+                return false;
+            }
+
+            AppendText("<<<SUCCESS>>>\n");
+
+            return true;
         }
 
 
@@ -149,9 +178,55 @@ namespace OmGui
         {
             backgroundWorker.DoWork += (bws, bwe) =>
             {
-                if (Execute())
+                if (!Execute())
                 {
-                    if (InvokeRequired) { this.Invoke(new MethodInvoker(() => { buttonOK.Enabled = true; })); }                    
+                    // Failed - show details
+                    checkBoxDetail.Checked = true;
+                }
+                else
+                {
+                    //if (InvokeRequired) 
+                    this.Invoke(new MethodInvoker(() => {
+
+                        // If we have to rename the output file as the final step...
+                        if (this.outputFile != null && this.finalFile != null)
+                        {
+                            for (;;)
+                            {
+                                try
+                                {
+                                    if (!File.Exists(this.outputFile))
+                                    {
+                                        AppendText("ERROR: Output file not found: " + this.outputFile);
+                                        return;
+                                    }
+                                    if (File.Exists(this.finalFile))
+                                    {
+                                        AppendText("NOTE: Removing existing output file: " + this.finalFile);
+                                        File.Delete(this.finalFile);
+                                    }
+                                    File.Move(this.outputFile, this.finalFile);
+                                    break;  // Continue
+                                }
+                                catch (Exception ex)
+                                {
+                                    AppendText("ERROR: Problem renaming output file: " + this.finalFile + " -- " + ex.Message);
+
+                                    DialogResult rdr = MessageBox.Show(null, "Problem writing output.\r\n\r\nDescription: " + ex.Message + "\r\n\r\nCheck if the file is open in an application:\r\n\r\n" + this.finalFile + "\r\n\r\nTry again?", "Cannot Overwrite - Retry?", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1);
+                                    // If we're not retrying...
+                                    if (rdr != DialogResult.Yes)
+                                    {
+                                        if (rdr == DialogResult.Cancel) { return; }   // Cancel
+                                        break;    // DialogResult.No -- Don't retry, but don't cancel (continue)
+                                    }
+                                }
+                            }
+                        }
+
+                        buttonOK.Enabled = true;
+                        cancelClose = false;
+                        if (autoClose) { buttonOK_Click(null, null); }
+                    })); 
                 }
             };
             backgroundWorker.RunWorkerCompleted += (bws, bwe) =>
@@ -160,14 +235,14 @@ namespace OmGui
                 //this.Close();
             };
 
-            pictureBoxProgress.Visible = true;
+            progressBar.Visible = pictureBoxProgress.Visible = true;
             backgroundWorker.RunWorkerAsync();
         }
 
 
         private void timerUpdate_Tick(object sender, EventArgs e)
         {
-            pictureBoxProgress.Visible = backgroundWorker.IsBusy;
+            progressBar.Visible = pictureBoxProgress.Visible = backgroundWorker.IsBusy;
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)
@@ -180,6 +255,17 @@ namespace OmGui
         {
             this.DialogResult = DialogResult.OK;
             this.Close();
+        }
+
+        private void checkBoxDetail_CheckedChanged(object sender, EventArgs e)
+        {
+            textBoxProgress.Visible = checkBoxDetail.Checked;
+
+            int minHeight = 400;
+            if (textBoxProgress.Visible && this.Height < minHeight)
+            {
+                this.Height = minHeight;
+            }
         }
 
     }

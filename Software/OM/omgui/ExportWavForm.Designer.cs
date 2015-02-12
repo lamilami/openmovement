@@ -96,6 +96,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBoxRate.FormattingEnabled = true;
             this.comboBoxRate.Items.AddRange(new object[] {
+            "auto",
             "25",
             "40",
             "50",
@@ -105,7 +106,7 @@
             this.comboBoxRate.Name = "comboBoxRate";
             this.comboBoxRate.Size = new System.Drawing.Size(230, 24);
             this.comboBoxRate.TabIndex = 3;
-            this.comboBoxRate.Text = "100";
+            this.comboBoxRate.Text = "auto";
             // 
             // label2
             // 
@@ -138,6 +139,7 @@
             this.Controls.Add(this.buttonResample);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ExportWavForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Resample to .WAV";
             this.Load += new System.EventHandler(this.ExportWavForm_Load);
             this.groupBox1.ResumeLayout(false);
