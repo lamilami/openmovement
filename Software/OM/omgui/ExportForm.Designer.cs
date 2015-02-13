@@ -73,7 +73,7 @@
             // buttonConvert
             // 
             this.buttonConvert.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonConvert.Location = new System.Drawing.Point(355, 489);
+            this.buttonConvert.Location = new System.Drawing.Point(355, 464);
             this.buttonConvert.Margin = new System.Windows.Forms.Padding(4);
             this.buttonConvert.Name = "buttonConvert";
             this.buttonConvert.Size = new System.Drawing.Size(100, 28);
@@ -86,7 +86,7 @@
             // 
             this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonCancel.Location = new System.Drawing.Point(464, 489);
+            this.buttonCancel.Location = new System.Drawing.Point(464, 464);
             this.buttonCancel.Margin = new System.Windows.Forms.Padding(4);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(100, 28);
@@ -158,14 +158,15 @@
             // 
             this.groupBoxStream.Controls.Add(this.radioButtonStreamGyro);
             this.groupBoxStream.Controls.Add(this.radioButtonStreamAccel);
-            this.groupBoxStream.Location = new System.Drawing.Point(20, 92);
+            this.groupBoxStream.Location = new System.Drawing.Point(291, 364);
             this.groupBoxStream.Margin = new System.Windows.Forms.Padding(4);
             this.groupBoxStream.Name = "groupBoxStream";
             this.groupBoxStream.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBoxStream.Size = new System.Drawing.Size(263, 82);
+            this.groupBoxStream.Size = new System.Drawing.Size(271, 82);
             this.groupBoxStream.TabIndex = 10;
             this.groupBoxStream.TabStop = false;
             this.groupBoxStream.Text = "&Stream";
+            this.groupBoxStream.Visible = false;
             // 
             // radioButtonStreamGyro
             // 
@@ -195,11 +196,11 @@
             // 
             this.groupBoxValues.Controls.Add(this.radioButtonValuesInt);
             this.groupBoxValues.Controls.Add(this.radioButtonValuesFloat);
-            this.groupBoxValues.Location = new System.Drawing.Point(20, 182);
+            this.groupBoxValues.Location = new System.Drawing.Point(20, 98);
             this.groupBoxValues.Margin = new System.Windows.Forms.Padding(4);
             this.groupBoxValues.Name = "groupBoxValues";
             this.groupBoxValues.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBoxValues.Size = new System.Drawing.Size(263, 87);
+            this.groupBoxValues.Size = new System.Drawing.Size(263, 101);
             this.groupBoxValues.TabIndex = 10;
             this.groupBoxValues.TabStop = false;
             this.groupBoxValues.Text = "&Values";
@@ -210,9 +211,9 @@
             this.radioButtonValuesInt.Location = new System.Drawing.Point(8, 52);
             this.radioButtonValuesInt.Margin = new System.Windows.Forms.Padding(4);
             this.radioButtonValuesInt.Name = "radioButtonValuesInt";
-            this.radioButtonValuesInt.Size = new System.Drawing.Size(56, 21);
+            this.radioButtonValuesInt.Size = new System.Drawing.Size(90, 21);
             this.radioButtonValuesInt.TabIndex = 0;
-            this.radioButtonValuesInt.Text = "Raw";
+            this.radioButtonValuesInt.Text = "Raw units";
             this.radioButtonValuesInt.UseVisualStyleBackColor = true;
             // 
             // radioButtonValuesFloat
@@ -222,10 +223,10 @@
             this.radioButtonValuesFloat.Location = new System.Drawing.Point(8, 23);
             this.radioButtonValuesFloat.Margin = new System.Windows.Forms.Padding(4);
             this.radioButtonValuesFloat.Name = "radioButtonValuesFloat";
-            this.radioButtonValuesFloat.Size = new System.Drawing.Size(40, 21);
+            this.radioButtonValuesFloat.Size = new System.Drawing.Size(96, 21);
             this.radioButtonValuesFloat.TabIndex = 0;
             this.radioButtonValuesFloat.TabStop = true;
-            this.radioButtonValuesFloat.Text = "G";
+            this.radioButtonValuesFloat.Text = "Gravity (g)";
             this.radioButtonValuesFloat.UseVisualStyleBackColor = true;
             // 
             // groupBoxTimestamps
@@ -245,7 +246,7 @@
             this.groupBoxTimestamps.Size = new System.Drawing.Size(273, 258);
             this.groupBoxTimestamps.TabIndex = 10;
             this.groupBoxTimestamps.TabStop = false;
-            this.groupBoxTimestamps.Text = "&Timestamps";
+            this.groupBoxTimestamps.Text = "&Timestamp Estimation";
             // 
             // radioButtonTimeTimestamp
             // 
@@ -288,9 +289,9 @@
             this.radioButtonTimeDays.Location = new System.Drawing.Point(8, 165);
             this.radioButtonTimeDays.Margin = new System.Windows.Forms.Padding(4);
             this.radioButtonTimeDays.Name = "radioButtonTimeDays";
-            this.radioButtonTimeDays.Size = new System.Drawing.Size(187, 21);
+            this.radioButtonTimeDays.Size = new System.Drawing.Size(235, 21);
             this.radioButtonTimeDays.TabIndex = 0;
-            this.radioButtonTimeDays.Text = "Fractional Days (relative)";
+            this.radioButtonTimeDays.Text = "Fractional Days (relative to start)";
             this.radioButtonTimeDays.UseVisualStyleBackColor = true;
             // 
             // radioButtonTimeSerial
@@ -310,9 +311,9 @@
             this.radioButtonTimeSecs.Location = new System.Drawing.Point(8, 108);
             this.radioButtonTimeSecs.Margin = new System.Windows.Forms.Padding(4);
             this.radioButtonTimeSecs.Name = "radioButtonTimeSecs";
-            this.radioButtonTimeSecs.Size = new System.Drawing.Size(144, 21);
+            this.radioButtonTimeSecs.Size = new System.Drawing.Size(192, 21);
             this.radioButtonTimeSecs.TabIndex = 0;
-            this.radioButtonTimeSecs.Text = "Seconds (relative)";
+            this.radioButtonTimeSecs.Text = "Seconds (relative to start)";
             this.radioButtonTimeSecs.UseVisualStyleBackColor = true;
             // 
             // radioButtonTimeSequence
@@ -345,14 +346,14 @@
             this.groupBoxSubSample.Controls.Add(this.labelSampleInterval);
             this.groupBoxSubSample.Controls.Add(this.labelSampleCount);
             this.groupBoxSubSample.Controls.Add(this.labelSampleFirst);
-            this.groupBoxSubSample.Location = new System.Drawing.Point(20, 277);
+            this.groupBoxSubSample.Location = new System.Drawing.Point(20, 207);
             this.groupBoxSubSample.Margin = new System.Windows.Forms.Padding(4);
             this.groupBoxSubSample.Name = "groupBoxSubSample";
             this.groupBoxSubSample.Padding = new System.Windows.Forms.Padding(4);
             this.groupBoxSubSample.Size = new System.Drawing.Size(263, 135);
             this.groupBoxSubSample.TabIndex = 10;
             this.groupBoxSubSample.TabStop = false;
-            this.groupBoxSubSample.Text = "Su&b-Sample";
+            this.groupBoxSubSample.Text = "Su&b-Sample (skip)";
             // 
             // textBoxSampleStep
             // 
@@ -420,14 +421,14 @@
             this.groupBox1.Controls.Add(this.textBoxBlockStart);
             this.groupBox1.Controls.Add(this.labelBlockCount);
             this.groupBox1.Controls.Add(this.labelBlockStart);
-            this.groupBox1.Location = new System.Drawing.Point(20, 420);
+            this.groupBox1.Location = new System.Drawing.Point(20, 350);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox1.Size = new System.Drawing.Size(263, 92);
+            this.groupBox1.Size = new System.Drawing.Size(263, 96);
             this.groupBox1.TabIndex = 10;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Specific Blocks";
+            this.groupBox1.Text = "Specific Data Blocks";
             // 
             // textBoxBlockCount
             // 
@@ -475,7 +476,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
-            this.ClientSize = new System.Drawing.Size(579, 532);
+            this.ClientSize = new System.Drawing.Size(579, 507);
             this.Controls.Add(this.groupBoxTimestamps);
             this.Controls.Add(this.groupBoxValues);
             this.Controls.Add(this.groupBox1);

@@ -5,13 +5,6 @@
 // TODO: Consider a preview for .WAV (wavs) and .CSV (grid, graph) files
 // TODO: Time-span (from selection), at least for .WAV export
 
-// done: SVM filtering in cut-points?
-// done: Don’t ask to generate WAV (auto-generate)
-// done: Always use temporary intermediary file, move in when successfully finished
-// done: Combination "Export" button (drop-down): "Export CSV", "Export raw CSV", "Export WAV"
-// done: Automatic WAV sample rate from source file
-
-
 
 /*
 Make .WAV:
@@ -23,7 +16,7 @@ Make .WAV:
 Make .SVM.CSV
  * Epoch (60 seconds)
  * Filter (off, 0.5-20Hz)
- * Mode: abs(sum(svm-1)) vs max(0,sum(svm-1))
+ * Mode: abs(sqrt(svm-1)) vs max(0,sqrt(svm-1))
 
 Make .WTV.CSV
  * Epochs (number of 0.5 minute periods)
@@ -2265,7 +2258,7 @@ Console.WriteLine("toolStripButtonDownload_Click() ENDED...");
             string[] filePaths = Directory.GetFiles(fileSystemWatcherOutput.Path, fileSystemWatcherOutput.Filter, System.IO.SearchOption.TopDirectoryOnly);
             foreach (string f in filePaths)
             {
-                if (!Path.GetExtension(f).Equals(".cwa", StringComparison.CurrentCultureIgnoreCase) && !Path.GetExtension(f).Equals(".part", StringComparison.CurrentCultureIgnoreCase))
+                if (!Path.GetExtension(f).Equals(".cwa", StringComparison.CurrentCultureIgnoreCase) && !Path.GetExtension(f).Equals(".part", StringComparison.CurrentCultureIgnoreCase) && !f.StartsWith(".") && (File.GetAttributes(f) & FileAttributes.Hidden) == 0)
                     outputListAddItem(f);
             }
         }

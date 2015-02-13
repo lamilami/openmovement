@@ -42,8 +42,20 @@ namespace OmGui
 
     public partial class MessageBoxEx : Form
     {
+        private Icon icon = null;
+        private Bitmap bitmap = null;
+
+        float scale;
+
         public MessageBoxEx(string text, string caption, MessageBoxExButtons buttons, MessageBoxExIcon icon, MessageBoxExDefaultButton defaultButton)
         {
+            Graphics dpig = CreateGraphics();
+            scale = 96f / dpig.DpiX;
+            dpig.Dispose();
+            Font = new Font(Font.Name, 8.25f * scale, Font.Style, Font.Unit, Font.GdiCharSet, Font.GdiVerticalFont);
+            //this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+
+
             InitializeComponent();
             DialogResult = System.Windows.Forms.DialogResult.None;
 
@@ -122,10 +134,24 @@ namespace OmGui
             // Set icon
             if (ico != null)
             {
-                labelPrompt.Width -= pictureBoxIcon.Width;
-                labelPrompt.Left += pictureBoxIcon.Width;
-                pictureBoxIcon.Visible = true;
-                pictureBoxIcon.Image = ico.ToBitmap();
+                int width = 48;
+                //width = pictureBoxIcon.Width;
+                labelPrompt.Width -= width;
+                labelPrompt.Left += width;
+
+                this.icon = ico;
+
+                //int dimension = 32; ico = new Icon(ico, dimension, dimension);
+
+                //Bitmap bitmap = ico.ToBitmap();
+                //Bitmap bitmap = Bitmap.FromHicon(ico);
+                Bitmap bitmap = new Bitmap(ico.Width, ico.Height, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+                Graphics g = Graphics.FromImage(bitmap);
+                g.Clear(Color.Transparent);
+                g.DrawIcon(ico, 0, 0);
+                g.Dispose();
+
+                this.bitmap = bitmap;
             }
         }
 
@@ -168,6 +194,27 @@ namespace OmGui
         private void MessageBoxEx_Resize(object sender, EventArgs e)
         {
             labelPrompt.MaximumSize = new Size(this.Width - labelPrompt.Left - 30, labelPrompt.MaximumSize.Height);
+        }
+
+
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            base.OnPaint(e);
+            e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+            if (this.icon != null)
+            {
+
+                Rectangle targetR = new Rectangle(14, 26, this.icon.Width, this.icon.Height);
+                e.Graphics.DrawIconUnstretched(this.icon, targetR);
+
+                //e.Graphics.DrawImageUnscaled(this.bitmap, 50, 0);
+
+                //e.Graphics.DrawIcon(this.icon, new Rectangle(14, 26 + 80, (int)(this.icon.Width * scale), (int)(this.icon.Height * scale)));
+            }
+            if (this.bitmap != null)
+            {
+                //e.Graphics.DrawImageUnscaled(this.bitmap, 100, 0);
+            }
         }
 
     }
