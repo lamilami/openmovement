@@ -32,13 +32,13 @@
             this.buttonResample = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.comboBoxFilter = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.comboBoxRate = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.comboBoxFilter = new System.Windows.Forms.ComboBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -83,6 +83,29 @@
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Options";
+            // 
+            // comboBoxFilter
+            // 
+            this.comboBoxFilter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBoxFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxFilter.FormattingEnabled = true;
+            this.comboBoxFilter.Items.AddRange(new object[] {
+            "none",
+            "BP 0.5-20Hz"});
+            this.comboBoxFilter.Location = new System.Drawing.Point(98, 99);
+            this.comboBoxFilter.Name = "comboBoxFilter";
+            this.comboBoxFilter.Size = new System.Drawing.Size(211, 24);
+            this.comboBoxFilter.TabIndex = 5;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(6, 102);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(43, 17);
+            this.label4.TabIndex = 4;
+            this.label4.Text = "Filter:";
             // 
             // comboBox1
             // 
@@ -159,29 +182,6 @@
             this.label1.TabIndex = 2;
             this.label1.Text = "Epoch:";
             // 
-            // comboBoxFilter
-            // 
-            this.comboBoxFilter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBoxFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxFilter.FormattingEnabled = true;
-            this.comboBoxFilter.Items.AddRange(new object[] {
-            "none",
-            "BP 0.5-20Hz"});
-            this.comboBoxFilter.Location = new System.Drawing.Point(98, 99);
-            this.comboBoxFilter.Name = "comboBoxFilter";
-            this.comboBoxFilter.Size = new System.Drawing.Size(211, 24);
-            this.comboBoxFilter.TabIndex = 5;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(6, 102);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(43, 17);
-            this.label4.TabIndex = 4;
-            this.label4.Text = "Filter:";
-            // 
             // ExportPaeeForm
             // 
             this.AcceptButton = this.buttonResample;
@@ -193,7 +193,11 @@
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonResample);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "ExportPaeeForm";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Activity level";
             this.Load += new System.EventHandler(this.ExportPaeeForm_Load);

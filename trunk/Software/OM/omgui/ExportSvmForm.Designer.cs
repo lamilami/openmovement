@@ -91,8 +91,8 @@
             this.comboBoxMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxMode.FormattingEnabled = true;
             this.comboBoxMode.Items.AddRange(new object[] {
-            "abs(sum(x^2+y^2+z^2)-1)",
-            "max(0,sum(x^2+y^2+z^2))"});
+            "abs(sqrt(x^2+y^2+z^2)-1)",
+            "max(0,sqrt(x^2+y^2+z^2))"});
             this.comboBoxMode.Location = new System.Drawing.Point(98, 92);
             this.comboBoxMode.Name = "comboBoxMode";
             this.comboBoxMode.Size = new System.Drawing.Size(230, 24);
@@ -189,7 +189,11 @@
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonResample);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "ExportSvmForm";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "SVM";
             this.Load += new System.EventHandler(this.ExportSvmForm_Load);

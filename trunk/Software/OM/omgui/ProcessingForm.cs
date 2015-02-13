@@ -32,6 +32,8 @@ namespace OmGui
         private string outputFile;
         private string finalFile;
         private bool autoClose;
+        private int originalHeight;
+        private const int expandedHeight = 400;
 
         public ProcessingForm(string executableName, List<string> args, string outputFile, string finalFile)
         {
@@ -42,6 +44,8 @@ namespace OmGui
             this.finalFile = finalFile;
             this.autoClose = true;
             buttonOK.Enabled = false;
+            this.originalHeight = this.Height;
+            this.DialogResult = DialogResult.Cancel;
         }
 
 
@@ -261,10 +265,19 @@ namespace OmGui
         {
             textBoxProgress.Visible = checkBoxDetail.Checked;
 
-            int minHeight = 400;
-            if (textBoxProgress.Visible && this.Height < minHeight)
+            if (checkBoxDetail.Checked)
             {
-                this.Height = minHeight;
+                if (this.Height < expandedHeight)
+                {
+                    this.Height = expandedHeight;
+                }
+            }
+            else
+            {
+                if (this.Height > this.originalHeight)
+                {
+                    this.Height = this.originalHeight;
+                }
             }
         }
 

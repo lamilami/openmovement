@@ -182,9 +182,9 @@
             this.checkBoxOneG.Location = new System.Drawing.Point(2, 77);
             this.checkBoxOneG.Margin = new System.Windows.Forms.Padding(2);
             this.checkBoxOneG.Name = "checkBoxOneG";
-            this.checkBoxOneG.Size = new System.Drawing.Size(49, 21);
+            this.checkBoxOneG.Size = new System.Drawing.Size(54, 21);
             this.checkBoxOneG.TabIndex = 0;
-            this.checkBoxOneG.Text = "1G";
+            this.checkBoxOneG.Text = "±1g";
             this.checkBoxOneG.UseVisualStyleBackColor = true;
             this.checkBoxOneG.CheckedChanged += new System.EventHandler(this.checkBox_CheckedChanged);
             // 
