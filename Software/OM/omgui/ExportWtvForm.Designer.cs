@@ -84,17 +84,13 @@
             this.comboBoxRate.Items.AddRange(new object[] {
             "1",
             "2",
-            "3",
             "4",
-            "5",
             "6",
             "8",
-            "10",
             "12",
+            "16",
             "24",
-            "40",
-            "60",
-            "120"});
+            "48"});
             this.comboBoxRate.Location = new System.Drawing.Point(64, 32);
             this.comboBoxRate.Name = "comboBoxRate";
             this.comboBoxRate.Size = new System.Drawing.Size(229, 24);

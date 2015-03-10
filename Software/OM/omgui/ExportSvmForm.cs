@@ -38,5 +38,10 @@ namespace OmGui
         public int Filter { get { return comboBoxFilter.SelectedIndex; } }
         public int Mode { get { return comboBoxMode.SelectedIndex; } }
 
+        private void comboBoxMode_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }

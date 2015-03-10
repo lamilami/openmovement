@@ -58,16 +58,17 @@
             this.labelSampleInterval = new System.Windows.Forms.Label();
             this.labelSampleCount = new System.Windows.Forms.Label();
             this.labelSampleFirst = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBoxTimeSlice = new System.Windows.Forms.GroupBox();
             this.textBoxBlockCount = new System.Windows.Forms.TextBox();
             this.textBoxBlockStart = new System.Windows.Forms.TextBox();
             this.labelBlockCount = new System.Windows.Forms.Label();
             this.labelBlockStart = new System.Windows.Forms.Label();
+            this.labelBlocks = new System.Windows.Forms.Label();
             this.groupBoxStream.SuspendLayout();
             this.groupBoxValues.SuspendLayout();
             this.groupBoxTimestamps.SuspendLayout();
             this.groupBoxSubSample.SuspendLayout();
-            this.groupBox1.SuspendLayout();
+            this.groupBoxTimeSlice.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonConvert
@@ -203,7 +204,7 @@
             this.groupBoxValues.Size = new System.Drawing.Size(263, 101);
             this.groupBoxValues.TabIndex = 10;
             this.groupBoxValues.TabStop = false;
-            this.groupBoxValues.Text = "&Values";
+            this.groupBoxValues.Text = "Accelerometer &Units";
             // 
             // radioButtonValuesInt
             // 
@@ -211,9 +212,9 @@
             this.radioButtonValuesInt.Location = new System.Drawing.Point(8, 52);
             this.radioButtonValuesInt.Margin = new System.Windows.Forms.Padding(4);
             this.radioButtonValuesInt.Name = "radioButtonValuesInt";
-            this.radioButtonValuesInt.Size = new System.Drawing.Size(90, 21);
+            this.radioButtonValuesInt.Size = new System.Drawing.Size(199, 21);
             this.radioButtonValuesInt.TabIndex = 0;
-            this.radioButtonValuesInt.Text = "Raw units";
+            this.radioButtonValuesInt.Text = "Raw sensor units (1/256 g)";
             this.radioButtonValuesInt.UseVisualStyleBackColor = true;
             // 
             // radioButtonValuesFloat
@@ -350,7 +351,7 @@
             this.groupBoxSubSample.Margin = new System.Windows.Forms.Padding(4);
             this.groupBoxSubSample.Name = "groupBoxSubSample";
             this.groupBoxSubSample.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBoxSubSample.Size = new System.Drawing.Size(263, 135);
+            this.groupBoxSubSample.Size = new System.Drawing.Size(263, 149);
             this.groupBoxSubSample.TabIndex = 10;
             this.groupBoxSubSample.TabStop = false;
             this.groupBoxSubSample.Text = "Su&b-Sample (skip)";
@@ -415,60 +416,77 @@
             this.labelSampleFirst.TabIndex = 0;
             this.labelSampleFirst.Text = "First:";
             // 
-            // groupBox1
+            // groupBoxTimeSlice
             // 
-            this.groupBox1.Controls.Add(this.textBoxBlockCount);
-            this.groupBox1.Controls.Add(this.textBoxBlockStart);
-            this.groupBox1.Controls.Add(this.labelBlockCount);
-            this.groupBox1.Controls.Add(this.labelBlockStart);
-            this.groupBox1.Location = new System.Drawing.Point(20, 350);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox1.Size = new System.Drawing.Size(263, 96);
-            this.groupBox1.TabIndex = 10;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Specific Data Blocks";
+            this.groupBoxTimeSlice.Controls.Add(this.textBoxBlockCount);
+            this.groupBoxTimeSlice.Controls.Add(this.textBoxBlockStart);
+            this.groupBoxTimeSlice.Controls.Add(this.labelBlocks);
+            this.groupBoxTimeSlice.Controls.Add(this.labelBlockCount);
+            this.groupBoxTimeSlice.Controls.Add(this.labelBlockStart);
+            this.groupBoxTimeSlice.Location = new System.Drawing.Point(20, 364);
+            this.groupBoxTimeSlice.Margin = new System.Windows.Forms.Padding(4);
+            this.groupBoxTimeSlice.Name = "groupBoxTimeSlice";
+            this.groupBoxTimeSlice.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBoxTimeSlice.Size = new System.Drawing.Size(263, 82);
+            this.groupBoxTimeSlice.TabIndex = 10;
+            this.groupBoxTimeSlice.TabStop = false;
+            this.groupBoxTimeSlice.Text = "Selected Time Slice";
             // 
             // textBoxBlockCount
             // 
             this.textBoxBlockCount.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxBlockCount.Location = new System.Drawing.Point(73, 60);
+            this.textBoxBlockCount.Location = new System.Drawing.Point(73, 79);
             this.textBoxBlockCount.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxBlockCount.Name = "textBoxBlockCount";
             this.textBoxBlockCount.Size = new System.Drawing.Size(180, 22);
             this.textBoxBlockCount.TabIndex = 1;
+            this.textBoxBlockCount.Visible = false;
+            this.textBoxBlockCount.TextChanged += new System.EventHandler(this.textBoxBlockCount_TextChanged);
             // 
             // textBoxBlockStart
             // 
             this.textBoxBlockStart.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxBlockStart.Location = new System.Drawing.Point(73, 28);
+            this.textBoxBlockStart.Location = new System.Drawing.Point(73, 47);
             this.textBoxBlockStart.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxBlockStart.Name = "textBoxBlockStart";
             this.textBoxBlockStart.Size = new System.Drawing.Size(180, 22);
             this.textBoxBlockStart.TabIndex = 1;
+            this.textBoxBlockStart.Visible = false;
+            this.textBoxBlockStart.TextChanged += new System.EventHandler(this.textBoxBlockStart_TextChanged);
             // 
             // labelBlockCount
             // 
             this.labelBlockCount.AutoSize = true;
-            this.labelBlockCount.Location = new System.Drawing.Point(8, 64);
+            this.labelBlockCount.Location = new System.Drawing.Point(8, 83);
             this.labelBlockCount.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelBlockCount.Name = "labelBlockCount";
             this.labelBlockCount.Size = new System.Drawing.Size(49, 17);
             this.labelBlockCount.TabIndex = 0;
             this.labelBlockCount.Text = "Count:";
+            this.labelBlockCount.Visible = false;
             // 
             // labelBlockStart
             // 
             this.labelBlockStart.AutoSize = true;
-            this.labelBlockStart.Location = new System.Drawing.Point(8, 32);
+            this.labelBlockStart.Location = new System.Drawing.Point(8, 51);
             this.labelBlockStart.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelBlockStart.Name = "labelBlockStart";
             this.labelBlockStart.Size = new System.Drawing.Size(42, 17);
             this.labelBlockStart.TabIndex = 0;
             this.labelBlockStart.Text = "Start:";
+            this.labelBlockStart.Visible = false;
+            // 
+            // labelBlocks
+            // 
+            this.labelBlocks.AutoSize = true;
+            this.labelBlocks.Location = new System.Drawing.Point(8, 27);
+            this.labelBlocks.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelBlocks.Name = "labelBlocks";
+            this.labelBlocks.Size = new System.Drawing.Size(13, 17);
+            this.labelBlocks.TabIndex = 0;
+            this.labelBlocks.Text = "-";
             // 
             // ExportForm
             // 
@@ -479,7 +497,7 @@
             this.ClientSize = new System.Drawing.Size(579, 507);
             this.Controls.Add(this.groupBoxTimestamps);
             this.Controls.Add(this.groupBoxValues);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.groupBoxTimeSlice);
             this.Controls.Add(this.groupBoxSubSample);
             this.Controls.Add(this.groupBoxStream);
             this.Controls.Add(this.labelFileSource);
@@ -489,6 +507,7 @@
             this.Controls.Add(this.buttonBrowse);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonConvert);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -506,8 +525,8 @@
             this.groupBoxTimestamps.PerformLayout();
             this.groupBoxSubSample.ResumeLayout(false);
             this.groupBoxSubSample.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.groupBoxTimeSlice.ResumeLayout(false);
+            this.groupBoxTimeSlice.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -545,10 +564,11 @@
         private System.Windows.Forms.Label labelSampleInterval;
         private System.Windows.Forms.Label labelSampleCount;
         private System.Windows.Forms.Label labelSampleFirst;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupBoxTimeSlice;
         private System.Windows.Forms.TextBox textBoxBlockCount;
         private System.Windows.Forms.TextBox textBoxBlockStart;
         private System.Windows.Forms.Label labelBlockCount;
         private System.Windows.Forms.Label labelBlockStart;
+        private System.Windows.Forms.Label labelBlocks;
     }
 }

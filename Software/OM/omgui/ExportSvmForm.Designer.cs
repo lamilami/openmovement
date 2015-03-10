@@ -92,11 +92,12 @@
             this.comboBoxMode.FormattingEnabled = true;
             this.comboBoxMode.Items.AddRange(new object[] {
             "abs(sqrt(x^2+y^2+z^2)-1)",
-            "max(0,sqrt(x^2+y^2+z^2))"});
+            "max(0,sqrt(x^2+y^2+z^2)-1)"});
             this.comboBoxMode.Location = new System.Drawing.Point(98, 92);
             this.comboBoxMode.Name = "comboBoxMode";
             this.comboBoxMode.Size = new System.Drawing.Size(230, 24);
             this.comboBoxMode.TabIndex = 3;
+            this.comboBoxMode.SelectedIndexChanged += new System.EventHandler(this.comboBoxMode_SelectedIndexChanged);
             // 
             // comboBoxFilter
             // 

@@ -199,7 +199,7 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Activity level";
+            this.Text = "Cut-point Analysis";
             this.Load += new System.EventHandler(this.ExportPaeeForm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

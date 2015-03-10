@@ -127,6 +127,17 @@ namespace OmGui
 
         DataBlockCache dataBlockCache = new DataBlockCache();
 
+
+        public string SelectionDescription
+        {
+            get
+            {
+                if (endBlock == beginBlock) return null;
+                return TimeForBlock(beginBlock) + " - " + TimeForBlock(endBlock);
+            }
+        }
+
+
         public new void Refresh()
         {
             bitmapDirty = true;
@@ -136,7 +147,7 @@ namespace OmGui
             }
             else
             {
-                graphPanel.SetSelection(PointForBlock(beginBlock), PointForBlock(endBlock), TimeForBlock(beginBlock) + " - " + TimeForBlock(endBlock));
+                graphPanel.SetSelection(PointForBlock(beginBlock), PointForBlock(endBlock), SelectionDescription);
             }
             Invalidate();
         }
