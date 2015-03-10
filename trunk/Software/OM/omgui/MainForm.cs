@@ -21,7 +21,7 @@ Make .SVM.CSV
 Make .WTV.CSV
  * Epochs (number of 0.5 minute periods)
 
-Make .PAEE.CSV
+Make .CUT.CSV
  * Epochs (number of 1 minute periods)
  * Model (dominant/"right" hand, non-dominant/"left" hand, weight)
 
@@ -1989,6 +1989,7 @@ Console.WriteLine("toolStripButtonDownload_Click() ENDED...");
         {
             float blockStart = -1;
             float blockCount = -1;
+            string blockDescription = null;
 
             // Selection
             if (dataViewer != null)
@@ -1997,6 +1998,7 @@ Console.WriteLine("toolStripButtonDownload_Click() ENDED...");
                 {
                     blockStart = dataViewer.SelectionBeginBlock + dataViewer.OffsetBlocks;
                     blockCount = dataViewer.SelectionEndBlock - dataViewer.SelectionBeginBlock;
+                    blockDescription = dataViewer.SelectionDescription;
                 }
             }
 
@@ -2058,15 +2060,15 @@ Console.WriteLine("toolStripButtonDownload_Click() ENDED...");
             //Export files
             //If we are chosing from the dataViewer then we only have one else we can have many.
             if (blockStart > -1 && blockCount > -1)
-                ExportData(files[0], blockStart, blockCount);
+                ExportData(files[0], blockStart, blockCount, blockDescription);
             else
                 ExportData(files, devicesSelected);
         }
 
-        private void ExportData(string fileName, float blockStart, float blockCount)
+        private void ExportData(string fileName, float blockStart, float blockCount, string blockDescription)
         {
             string folder = GetPath(Properties.Settings.Default.CurrentWorkingFolder);
-            ExportForm exportForm = new ExportForm(fileName, folder, blockStart, blockCount);
+            ExportForm exportForm = new ExportForm(fileName, folder, blockStart, blockCount, blockDescription);
             DialogResult result = exportForm.ShowDialog(this);
         }
 
@@ -2079,7 +2081,7 @@ Console.WriteLine("toolStripButtonDownload_Click() ENDED...");
 
             foreach (string fileName in files)
             {
-                exportForm = new ExportForm(fileName, folder, -1, -1);
+                exportForm = new ExportForm(fileName, folder, -1, -1, null);
                 exportForm.ShowDialog();
             }
 
@@ -4060,11 +4062,11 @@ Application.DoEvents();
 
         private void cutPointsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // Make .PAEE.CSV
+            // Make .CUT.CSV
             //  * Epochs (number of 1 minute periods)
             //  * Model (dominant/"right" hand, non-dominant/"left" hand, weight)
             bool regenerateWav = (Control.ModifierKeys & Keys.Shift) != 0;
-            string[] inputFiles = GetSelectedFilesForConvert(".paee.csv");
+            string[] inputFiles = GetSelectedFilesForConvert(".cut.csv");
             if (inputFiles == null) { return; }
             ExportPaeeForm optionsForm = new ExportPaeeForm();
             DialogResult dr = optionsForm.ShowDialog();
@@ -4076,7 +4078,7 @@ Application.DoEvents();
             {
                 List<string> args = new List<string>();
                 string input = Path.ChangeExtension(file, ".wav");
-                string final = Path.ChangeExtension(file, ".paee.csv");
+                string final = Path.ChangeExtension(file, ".cut.csv");
                 string output = final + ".part";
 
                 args.Add("\"" + input + "\"");
