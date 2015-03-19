@@ -131,6 +131,7 @@ namespace OmGui
         {
             this.configDumpFile = myConfigDumpFile;
             downloadDumpFile = myDownloadDumpFile;
+            this.startupPath = startupPath;
 
             if (uac == 1)
             {
