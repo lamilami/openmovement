@@ -126,7 +126,8 @@ namespace OmGui
         private string configDumpFile = null;
         private string downloadDumpFile = null;
         private bool noUpdateCheck = false;
-        public MainForm(int uac, string myConfigDumpFile, string myDownloadDumpFile, bool noUpdateCheck)
+        private string startupPath = null;
+        public MainForm(int uac, string myConfigDumpFile, string myDownloadDumpFile, bool noUpdateCheck, string startupPath)
         {
             this.configDumpFile = myConfigDumpFile;
             downloadDumpFile = myDownloadDumpFile;
@@ -2102,6 +2103,31 @@ Console.WriteLine("toolStripButtonDownload_Click() ENDED...");
         public bool inWorkingFolder = false;
         string defaultTitleText = "Open Movement " + " [V" + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString() + "]";
 
+        private void ChangeWorkingFolder(string newPath)
+        {
+            Properties.Settings.Default.CurrentWorkingFolder = newPath;
+            LoadWorkingFolder();
+
+            //Add to recent folders.
+            if (!Properties.Settings.Default.RecentFolders.Contains(newPath))
+            {
+                if (Properties.Settings.Default.RecentFolders.Count == 5)
+                {
+                    Properties.Settings.Default.RecentFolders.RemoveAt(4);
+                }
+
+                Properties.Settings.Default.RecentFolders.Insert(0, newPath);
+            }
+            else
+            {
+                //If we have it we should move it up the list so it is the most recent.
+                Properties.Settings.Default.RecentFolders.Remove(newPath);
+                Properties.Settings.Default.RecentFolders.Insert(0, newPath);
+            }
+
+            UpdateRecentFoldersInGUI();
+        }
+
         private void workingFolderToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog fbd = new FolderBrowserDialog();
@@ -2113,29 +2139,10 @@ Console.WriteLine("toolStripButtonDownload_Click() ENDED...");
 
             if (dr == System.Windows.Forms.DialogResult.OK)
             {
-                Properties.Settings.Default.CurrentWorkingFolder = fbd.SelectedPath;
+                string newPath = fbd.SelectedPath;
+                ChangeWorkingFolder(newPath);
             }
 
-            LoadWorkingFolder();
-
-            //Add to recent folders.
-            if (!Properties.Settings.Default.RecentFolders.Contains(fbd.SelectedPath))
-            {
-                if (Properties.Settings.Default.RecentFolders.Count == 5)
-                {
-                    Properties.Settings.Default.RecentFolders.RemoveAt(4);
-                }
-
-                Properties.Settings.Default.RecentFolders.Insert(0, fbd.SelectedPath);
-            }
-            else
-            {
-                //If we have it we should move it up the list so it is the most recent.
-                Properties.Settings.Default.RecentFolders.Remove(fbd.SelectedPath);
-                Properties.Settings.Default.RecentFolders.Insert(0, fbd.SelectedPath);
-            }
-
-            UpdateRecentFoldersInGUI();
         }
 
         private void UpdateRecentFoldersInGUI()
@@ -2176,6 +2183,7 @@ Console.WriteLine("toolStripButtonDownload_Click() ENDED...");
             }
         }
 
+        // Toolstrip handler for recentFoldersToolStripMenuItem
         void MainForm_Click(object sender, EventArgs e)
         {
             ToolStripItem t = (ToolStripItem)sender;
@@ -2312,7 +2320,14 @@ Console.WriteLine("toolStripButtonDownload_Click() ENDED...");
                 Properties.Settings.Default.CurrentWorkingFolder = GetPath("{MyDocuments}");
             }
 
-            LoadWorkingFolder();
+            if (startupPath != null)
+            {
+                ChangeWorkingFolder(startupPath);
+            }
+            else
+            {
+                LoadWorkingFolder();
+            }
 
             //Recent Folders
             if (Properties.Settings.Default.RecentFolders.Count == 0)
